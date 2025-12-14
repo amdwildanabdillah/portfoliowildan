@@ -1,0 +1,23 @@
+:root {
+  --bg-color: #050505;
+  --text-main: #ffffff;
+  --text-muted: #aaaaaa;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(20, 20, 20, 0.4);
+  --glow-purple: rgba(120, 58, 255, 0.4);
+  --glow-cyan: rgba(0, 255, 209, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: 'General Sans', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}

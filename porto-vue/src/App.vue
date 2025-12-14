@@ -1,4 +1,58 @@
-<script setup></script>
+<script setup>
+import { onMounted, onBeforeUnmount } from 'vue'
+
+let cleanups = []
+
+onMounted(() => {
+  // --- MAGNETIC BUTTON ---
+  const buttons = document.querySelectorAll('.magnetic-btn')
+
+  buttons.forEach((btn) => {
+    const strength = 0.5
+
+    const onMove = (e) => {
+      const rect = btn.getBoundingClientRect()
+      const x = e.clientX - rect.left - rect.width / 2
+      const y = e.clientY - rect.top - rect.height / 2
+
+      btn.style.transform = `translate(${x * strength}px, ${y * strength}px)`
+    }
+
+    const onLeave = () => {
+      btn.style.transform = 'translate(0px, 0px)'
+    }
+
+    btn.addEventListener('mousemove', onMove)
+    btn.addEventListener('mouseleave', onLeave)
+
+    cleanups.push(() => {
+      btn.removeEventListener('mousemove', onMove)
+      btn.removeEventListener('mouseleave', onLeave)
+    })
+  })
+
+  // --- OPTIONAL: Smooth Scroll untuk anchor (#...) ---
+  const anchors = document.querySelectorAll('a[href^="#"]')
+  anchors.forEach((a) => {
+    const onClick = (e) => {
+      const id = a.getAttribute('href')
+      const target = id ? document.querySelector(id) : null
+      if (!target) return
+
+      e.preventDefault()
+      target.scrollIntoView({ behavior: 'smooth' })
+    }
+
+    a.addEventListener('click', onClick)
+    cleanups.push(() => a.removeEventListener('click', onClick))
+  })
+})
+
+onBeforeUnmount(() => {
+  cleanups.forEach((fn) => fn())
+  cleanups = []
+})
+</script>
 
 <template>
   <div class="ambient-glow glow-purple"></div>
@@ -555,11 +609,13 @@ a {
   border-radius: 12px;
   font-size: 0.9rem;
   font-weight: 500;
-  transition:
-    background 0.2s,
-    border 0.2s;
   position: relative;
   overflow: hidden;
+  transition:
+    transform 0.15s ease,
+    background 0.2s,
+    border 0.2s;
+  will-change: transform;
 }
 
 .magnetic-btn i,

@@ -1,25 +1,243 @@
+/* =========================================
+   1. VARIABLES & RESET
+   ========================================= */
 :root {
-  --bg-color: #050505;
-  --text-main: #ffffff;
-  --text-muted: #aaaaaa;
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-bg: rgba(20, 20, 20, 0.4);
-  --glow-purple: rgba(120, 58, 255, 0.4);
-  --glow-cyan: rgba(0, 255, 209, 0.3);
+    --bg-color: #050505;
+    --text-main: #ffffff;
+    --text-muted: #aaaaaa;
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-bg: rgba(20, 20, 20, 0.4);
+    --glow-purple: rgba(120, 58, 255, 0.4);
+    --glow-cyan: rgba(0, 255, 209, 0.3);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-html {
-  scroll-behavior: smooth;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-  background-color: var(--bg-color);
-  color: var(--text-main);
-  font-family: 'General Sans', sans-serif;
-  overflow-x: hidden;
-  min-height: 100vh;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'General Sans', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* =========================================
+   2. BACKGROUND EFFECTS
+   ========================================= */
+.ambient-glow {
+    position: fixed; width: 600px; height: 600px; border-radius: 50%;
+    filter: blur(120px); z-index: -1; opacity: 0.6; pointer-events: none;
+    animation: float 10s infinite ease-in-out alternate;
+}
+.glow-purple { top: -150px; left: -100px; background: var(--glow-purple); }
+.glow-cyan { bottom: -150px; right: -100px; background: var(--glow-cyan); animation-delay: 2s; }
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 50px) scale(1.1); }
+}
+
+/* =========================================
+   3. TYPOGRAPHY & NAVBAR
+   ========================================= */
+h1, h2, h3 { font-family: 'Clash Display', sans-serif; font-weight: 600; }
+a { text-decoration: none; color: inherit; }
+
+.glass-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 50px; position: fixed; width: 100%; top: 0; z-index: 100;
+    backdrop-filter: blur(10px); background: rgba(5,5,5,0.5); border-bottom: 1px solid var(--glass-border);
+}
+.glass-nav ul { display: flex; gap: 30px; list-style: none; }
+.btn-hire { border: 1px solid #fff; padding: 8px 20px; border-radius: 50px; transition: 0.3s; }
+.btn-hire:hover { background: #fff; color: #000; }
+
+/* =========================================
+   4. HERO SECTION
+   ========================================= */
+.hero {
+    height: auto; min-height: 50vh; display: flex;
+    justify-content: center; align-items: center; text-align: center;
+    position: relative; padding-top: 120px; padding-bottom: 40px;
+}
+.hero-content h1 { font-size: 4.5rem; line-height: 1.1; margin: 20px 0; }
+.text-gradient {
+    background: linear-gradient(to right, #ffffff, #b084ff);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    padding-right: 5px; display: inline-block;
+}
+.badge {
+    border: 1px solid rgba(255,255,255,0.2); padding: 5px 15px;
+    border-radius: 20px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
+    background: rgba(255,255,255,0.05);
+}
+
+/* =========================================
+   5. BENTO GRID SYSTEM
+   ========================================= */
+.container { padding: 50px; max-width: 1400px; margin: 0 auto; }
+.bento-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto; gap: 20px;
+}
+
+.glass-card {
+    background: var(--glass-bg); backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border); border-radius: 24px; padding: 30px;
+    position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+.glass-card:hover { transform: translateY(-5px); border-color: rgba(255, 255, 255, 0.3); }
+.card-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover; background-position: center; opacity: 0.5; z-index: 0; transition: 0.5s;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0));
+}
+.glass-card:hover .card-bg { transform: scale(1.05); opacity: 0.7; }
+.card-content { position: relative; z-index: 1; pointer-events: none; }
+.tag {
+    background: rgba(255,255,255,0.1); padding: 6px 14px;
+    border-radius: 30px; font-size: 0.75rem; text-transform: uppercase;
+    display: inline-block; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.1);
+}
+
+.item-main { grid-column: span 2; grid-row: span 2; }
+.item-tech { grid-column: span 2; }
+.item-photo { grid-column: span 1; }
+.item-social { grid-column: span 1; }
+
+/* =========================================
+   6. FEATURE: ABOUT ME & CARD (LAYOUT FIX)
+   ========================================= */
+.item-about {
+    grid-column: span 4; /* FULL LEBAR */
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+    /* GANTI INI BIAR TEKS DI KIRI, KARTU DI KANAN */
+    justify-content: space-between; 
+    padding: 60px 80px; 
+    gap: 50px; 
+    overflow: hidden; /* Biar gak bocor */
+}
+
+.about-text {
+    /* GANTI INI BIAR FLEKSIBEL */
+    flex: 1; 
+    max-width: 650px; /* Batas maksimal lebar teks */
+    text-align: left; 
+    z-index: 2;
+}
+
+.about-text h2 {
+    font-size: 3rem; /* Gedein dikit biar mantap */
+    line-height: 1.2;
+    margin: 15px 0;
+    background: linear-gradient(to right, #fff, #b084ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: left;
+}
+
+.about-text p { 
+    font-size: 1rem; 
+    color: var(--text-muted); 
+    margin-bottom: 30px; 
+    line-height: 1.6; 
+    max-width: 90%; /* Biar paragraf gak kepanjangan */
+}
+
+.stats { display: flex; gap: 40px; }
+.stat-box h3 { font-size: 1.8rem; margin-bottom: 5px; color: #fff; }
+.stat-box p { font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; }
+
+/* WRAPPER KARTU GANTUNG */
+.id-card-wrapper {
+    position: relative; 
+    flex: 0 0 200px; /* Kunci lebar area kartu biar gak kegencet */
+    height: auto; 
+    min-height: 300px;
+    display: flex; justify-content: center; perspective: 1000px;
+}
+
+/* TALI SIMPLE (GRADIENT FADE) */
+.lanyard-string {
+    position: absolute; top: -100px; width: 2px; height: 120px;
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.4)); z-index: 10;
+}
+
+/* KARTU GANTUNG (DESAIN RAPI) */
+.hanging-card {
+    position: relative; top: 20px; width: 160px; height: auto; min-height: 240px; padding-bottom: 25px;
+    background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 15px;
+    display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: flex-start;
+    padding: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transform-origin: top center; animation: swing 3s infinite ease-in-out;
+}
+@keyframes swing { 0% { transform: rotate(5deg); } 50% { transform: rotate(-5deg); } 100% { transform: rotate(5deg); } }
+.hanging-card:hover { animation-play-state: paused; border-color: #b084ff; }
+
+/* ISI KARTU */
+.card-header, .card-body { width: 100%; display: flex; flex-direction: column; align-items: center; }
+.hole { width: 30px; height: 5px; background: rgba(0,0,0,0.5); border-radius: 10px; margin-bottom: 10px; }
+.role { font-size: 0.6rem; letter-spacing: 2px; background: #b084ff; color: white; padding: 2px 8px; border-radius: 4px; font-weight: 700; margin-bottom: 10px; display: inline-block;}
+.profile-pic { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.5); margin-bottom: 10px; display: block; }
+.hanging-card h3 { font-size: 1.2rem; margin-bottom: 2px; width: 100%; }
+.hanging-card p { font-size: 0.8rem; color: var(--text-muted); width: 100%; }
+
+/* BARCODE KOSMETIK */
+.barcode {
+    margin-top: 20px; width: 100%;
+    font-family: 'Courier New', monospace; font-weight: 900; font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.5); letter-spacing: -2px; transform: scaleY(0.6);
+}
+
+/* =========================================
+   7. SOCIAL & FOOTER
+   ========================================= */
+.item-social { justify-content: space-between; padding: 25px; }
+.social-links { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+.magnetic-btn {
+    display: flex; align-items: center; gap: 12px; padding: 14px 20px;
+    background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 12px;
+    font-size: 0.9rem; font-weight: 500; transition: background 0.2s, border 0.2s;
+}
+.magnetic-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); }
+footer { text-align: center; padding: 50px; color: var(--text-muted); font-size: 0.8rem; }
+
+/* =========================================
+   8. MEDIA QUERIES (RESPONSIVE)
+   ========================================= */
+@media (max-width: 1024px) {
+    .bento-grid { grid-template-columns: repeat(2, 1fr); }
+    .item-main, .item-about { grid-column: span 2; }
+}
+@media (max-width: 900px) {
+    /* Khusus About Me di HP/Tablet Kecil */
+    .item-about { 
+        flex-direction: column-reverse; /* Teks di bawah, Kartu di atas */
+        text-align: center; 
+        padding: 40px 20px; 
+        gap: 40px; 
+    }
+    .about-text { width: 100%; max-width: 100%; text-align: center; }
+    .about-text h2 { text-align: center; font-size: 2rem; }
+    .about-text p { max-width: 100%; }
+    .stats { justify-content: center; }
+}
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 2.5rem; }
+    .glass-nav ul { display: none; }
+    .bento-grid { display: flex; flex-direction: column; height: auto; }
+}
+
+.clickable-card {
+  text-decoration: none; 
+  cursor: pointer;      
+  color: inherit;       
+  display: flex;        
 }

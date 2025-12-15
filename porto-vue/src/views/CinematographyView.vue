@@ -2,36 +2,52 @@
 import { ref } from 'vue'
 
 const videos = ref([
-  // 1. BEHANCE (JADI LINK - BIAR RAPI)
-  { 
-    type: 'link',                 // <--- Kita set 'link' aja biar gak maksa embed
-    id: 'https://www.behance.net/gallery/194103791/UPEKSHA', // Link Lengkap
-    title: 'UPEKSHA Project', 
-    category: 'BEHANCE • UI/UX' 
-  },
 
   // 2. YOUTUBE (TETAP EMBED - KARENA BAGUS)
-  { 
-    type: 'youtube', 
-    id: 'gDOdVnRsZ0E', 
-    title: 'Cinematic Vlog', 
-    category: 'COMPETITION' 
+  {
+    type: 'youtube',
+    id: 'gDOdVnRsZ0E',
+    title: 'Cinematic Vlog',
+    category: 'COMPETITION'
+  },
+
+  {
+    type: 'youtube',
+    id: 'vDXaoQyCoAs',
+    title: 'DUA SISI',
+    category: 'SHORT MOVIE'
+  },
+
+  {
+    type: 'youtube',
+    id: '1B131fvG1z4',
+    title: 'After Movie',
+    category: 'GASS PT. HM SAMPOERNA'
   },
 
   // 3. GOOGLE DRIVE (TETAP EMBED)
-  { 
-    type: 'drive', 
-    id: '1X6jOYJeLK8weWPDFBSZRODS5Ue3bwjgl', 
-    title: 'PT. SAMPOERNA Tbk.', 
-    category: 'AFTER MOVIE' 
+  {
+    type: 'drive',
+    id: '1X6jOYJeLK8weWPDFBSZRODS5Ue3bwjgl',
+    title: 'PT. SAMPOERNA Tbk.',
+    category: 'AFTER MOVIE'
   },
 
-  { 
-    type: 'youtube', 
-    id: 'vDXaoQyCoAs', 
-    title: 'DUA SISI', 
-    category: 'SHORT MOVIE' 
+  {
+    type: 'youtube',
+    id: 'vDXaoQyCoAs',
+    title: 'DUA SISI',
+    category: 'SHORT MOVIE'
   },
+
+  // 1. BEHANCE (JADI LINK - BIAR RAPI)
+  {
+    type: 'link',                 // <--- Kita set 'link' aja biar gak maksa embed
+    id: 'https://www.behance.net/gallery/194103791/UPEKSHA', // Link Lengkap
+    title: 'UPEKSHA Project',
+    category: 'BEHANCE • UI/UX'
+  },
+
 ])
 
 // --- MESIN PINTAR ---
@@ -50,7 +66,7 @@ const getSrc = (video) => {
         <router-link to="/" class="btn-back">
             <i class="ph ph-arrow-left"></i> Kembali ke Home
         </router-link>
-        
+
         <div class="header-text">
             <span class="badge">PRO GALLERY</span>
             <h1>My <span class="text-gradient">Portfolio</span></h1>
@@ -60,7 +76,7 @@ const getSrc = (video) => {
 
     <div class="fixed-grid-wrapper">
         <div v-for="(video, index) in videos" :key="index" class="glass-card video-card-fixed">
-            
+
             <div v-if="video.type === 'link'" class="link-wrapper">
                 <a :href="video.id" target="_blank" class="link-btn">
                     <i class="ph ph-behance-logo icon-big"></i>
@@ -70,8 +86,8 @@ const getSrc = (video) => {
             </div>
 
             <div v-else class="video-wrapper">
-                <iframe 
-                    :src="getSrc(video)" 
+                <iframe
+                    :src="getSrc(video)"
                     allow="autoplay; encrypted-media; picture-in-picture"
                     allowfullscreen
                     frameborder="0">
@@ -107,15 +123,15 @@ const getSrc = (video) => {
 .fixed-grid-wrapper { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; width: 100%; max-width: 1200px; }
 
 /* KARTU FIX SIZE (SEMUA SAMA RATA) */
-.video-card-fixed { 
-    width: 320px !important; 
-    flex: 0 0 auto !important; 
-    background: rgba(20, 20, 20, 0.6); 
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-    border-radius: 16px; 
-    overflow: hidden; 
-    transition: transform 0.3s; 
-    display: flex; flex-direction: column; 
+.video-card-fixed {
+    width: 320px !important;
+    flex: 0 0 auto !important;
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    display: flex; flex-direction: column;
 }
 .video-card-fixed:hover { transform: translateY(-10px); border-color: rgba(176, 132, 255, 0.5); }
 
@@ -123,7 +139,7 @@ const getSrc = (video) => {
 .link-wrapper {
     width: 100%;
     /* Rasio 16:9 juga biar SAMA PERSIS kayak YouTube */
-    aspect-ratio: 16/9; 
+    aspect-ratio: 16/9;
     background: linear-gradient(135deg, #053eff 0%, #000000 100%); /* Warna Behance Style */
     display: flex; align-items: center; justify-content: center;
 }
@@ -136,11 +152,11 @@ const getSrc = (video) => {
 .icon-small { font-size: 1rem; margin-top: 5px; }
 
 /* --- 2. MODE VIDEO (YT/DRIVE) --- */
-.video-wrapper { 
-    position: relative; 
-    width: 100%; 
+.video-wrapper {
+    position: relative;
+    width: 100%;
     padding-bottom: 56.25%; /* 16:9 Standard */
-    height: 0; background: #000; 
+    height: 0; background: #000;
 }
 .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 

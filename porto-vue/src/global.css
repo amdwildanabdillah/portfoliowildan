@@ -113,21 +113,21 @@ a { text-decoration: none; color: inherit; }
    ========================================= */
 .item-about {
     grid-column: span 4; /* FULL LEBAR */
-    display: flex; 
-    flex-direction: row; 
-    align-items: center; 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     /* GANTI INI BIAR TEKS DI KIRI, KARTU DI KANAN */
-    justify-content: space-between; 
-    padding: 60px 80px; 
-    gap: 50px; 
+    justify-content: space-between;
+    padding: 60px 80px;
+    gap: 50px;
     overflow: hidden; /* Biar gak bocor */
 }
 
 .about-text {
     /* GANTI INI BIAR FLEKSIBEL */
-    flex: 1; 
+    flex: 1;
     max-width: 650px; /* Batas maksimal lebar teks */
-    text-align: left; 
+    text-align: left;
     z-index: 2;
 }
 
@@ -142,11 +142,11 @@ a { text-decoration: none; color: inherit; }
     text-align: left;
 }
 
-.about-text p { 
-    font-size: 1rem; 
-    color: var(--text-muted); 
-    margin-bottom: 30px; 
-    line-height: 1.6; 
+.about-text p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    line-height: 1.6;
     max-width: 90%; /* Biar paragraf gak kepanjangan */
 }
 
@@ -156,9 +156,9 @@ a { text-decoration: none; color: inherit; }
 
 /* WRAPPER KARTU GANTUNG */
 .id-card-wrapper {
-    position: relative; 
+    position: relative;
     flex: 0 0 200px; /* Kunci lebar area kartu biar gak kegencet */
-    height: auto; 
+    height: auto;
     min-height: 300px;
     display: flex; justify-content: center; perspective: 1000px;
 }
@@ -170,13 +170,34 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* KARTU GANTUNG (DESAIN RAPI) */
+/* KARTU GANTUNG (FIX RATA TENGAH) */
 .hanging-card {
-    position: relative; top: 20px; width: 160px; height: auto; min-height: 240px; padding-bottom: 25px;
-    background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 15px;
-    display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: flex-start;
-    padding: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    transform-origin: top center; animation: swing 3s infinite ease-in-out;
+    position: relative;
+    top: 20px;
+    width: 160px;
+
+    /* GANTI TINGGI BIAR PAS */
+    height: 100%;       /* Ikutin tinggi wadahnya */
+    min-height: 260px;  /* Minimal segini biar barcode gak kepotong */
+
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    /* INI KUNCINYA MAS: */
+    justify-content: center; /* Biar konten ada di TENGAH vertikal */
+    gap: 15px;               /* Jarak antar elemen (Foto ke Nama, Nama ke Barcode) */
+
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transform-origin: top center;
+    animation: swing 3s infinite ease-in-out;
 }
 @keyframes swing { 0% { transform: rotate(5deg); } 50% { transform: rotate(-5deg); } 100% { transform: rotate(5deg); } }
 .hanging-card:hover { animation-play-state: paused; border-color: #b084ff; }
@@ -218,11 +239,11 @@ footer { text-align: center; padding: 50px; color: var(--text-muted); font-size:
 }
 @media (max-width: 900px) {
     /* Khusus About Me di HP/Tablet Kecil */
-    .item-about { 
+    .item-about {
         flex-direction: column-reverse; /* Teks di bawah, Kartu di atas */
-        text-align: center; 
-        padding: 40px 20px; 
-        gap: 40px; 
+        text-align: center;
+        padding: 40px 20px;
+        gap: 40px;
     }
     .about-text { width: 100%; max-width: 100%; text-align: center; }
     .about-text h2 { text-align: center; font-size: 2rem; }
@@ -236,8 +257,129 @@ footer { text-align: center; padding: 50px; color: var(--text-muted); font-size:
 }
 
 .clickable-card {
-  text-decoration: none; 
-  cursor: pointer;      
-  color: inherit;       
-  display: flex;        
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+  display: flex;
+}
+
+/* =========================================
+   9. SOCIAL BUTTON COLORS (NEON EFFECT)
+   ========================================= */
+
+/* Transisi biar warnanya gak kaget */
+.magnetic-btn {
+    transition: all 0.3s ease;
+}
+
+/* 1. BEHANCE (Biru Elektrik) */
+.btn-be:hover {
+    border-color: #1769ff;
+    color: #1769ff;
+    background: rgba(23, 105, 255, 0.1);
+    box-shadow: 0 0 20px rgba(23, 105, 255, 0.4); /* Efek Neon */
+}
+
+/* 2. GITHUB (Putih Bersih / Abu Terang) */
+.btn-gh:hover {
+    border-color: #ffffff;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* 3. INSTAGRAM (Pink Magenta) */
+.btn-ig:hover {
+    border-color: #d62976;
+    color: #d62976;
+    background: rgba(214, 41, 118, 0.1);
+    box-shadow: 0 0 20px rgba(214, 41, 118, 0.4);
+}
+
+/* 4. LINKEDIN (Biru Profesional) */
+.btn-li:hover {
+    border-color: #0a66c2;
+    color: #0a66c2;
+    background: rgba(10, 102, 194, 0.1);
+    box-shadow: 0 0 20px rgba(10, 102, 194, 0.4);
+}
+
+/* =========================================
+   10. MOBILE FLOATING NAVIGATION (MENU HP)
+   ========================================= */
+/* Default: Sembunyi di Laptop */
+.mobile-nav { display: none; }
+
+/* Muncul cuma di HP */
+@media (max-width: 768px) {
+    .mobile-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        position: fixed;
+        bottom: 20px;    /* Melayang di bawah */
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: 85%;      /* Lebar menu */
+        height: 65px;
+
+        /* Efek Kaca Gelap */
+        background: rgba(20, 20, 20, 0.8);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50px;
+
+        z-index: 1000;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* Style Icon */
+    .nav-icon {
+        color: #888;
+        font-size: 1.8rem;
+        transition: 0.3s;
+        display: flex; align-items: center; justify-content: center;
+        width: 50px; height: 50px; border-radius: 50%;
+        text-decoration: none;
+    }
+
+    /* Icon Tengah (Work) Dikasih Spesial */
+    .center-icon {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* Efek Pencet */
+    .nav-icon:active, .nav-icon:hover {
+        color: #b084ff;
+        transform: scale(1.1);
+    }
+    .center-icon:active, .center-icon:hover {
+        background: #b084ff;
+        color: #fff;
+        box-shadow: 0 0 15px rgba(176, 132, 255, 0.5);
+    }
+}
+
+/* =========================================
+   TAMBAHAN: ACTIVE STATE (SCROLL SPY)
+   ========================================= */
+
+/* Kalau lagi aktif, warnanya jadi Ungu Neon */
+.nav-icon.active-link {
+    color: #b084ff;
+    transform: scale(1.1); /* Sedikit membesar */
+    text-shadow: 0 0 10px rgba(176, 132, 255, 0.6); /* Efek cahaya */
+}
+
+/* Khusus icon tengah, kalau aktif backgroundnya juga nyala */
+.center-icon.active-link {
+    background: #b084ff;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(176, 132, 255, 0.6);
+    border-color: transparent;
 }

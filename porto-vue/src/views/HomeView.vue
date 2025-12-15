@@ -1,56 +1,34 @@
 <script setup>
-import { onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
-let cleanups = []
+// --- 1. OTAK SCROLL SPY ---
+const activeSection = ref('')
+let observer = null
 
 onMounted(() => {
-  // --- MAGNETIC BUTTON ---
-  const buttons = document.querySelectorAll('.magnetic-btn')
+  // Daftar target yang mau dipantau CCTV
+  const sections = document.querySelectorAll('#about-section, #work-section, #social-section')
 
-  buttons.forEach((btn) => {
-    const strength = 0.5
+  const options = {
+    root: null,
+    threshold: 0.5 // Kalau 50% kotak kelihatan, langsung nyala
+  }
 
-    const onMove = (e) => {
-      const rect = btn.getBoundingClientRect()
-      const x = e.clientX - rect.left - rect.width / 2
-      const y = e.clientY - rect.top - rect.height / 2
-
-      btn.style.transform = `translate(${x * strength}px, ${y * strength}px)`
-    }
-
-    const onLeave = () => {
-      btn.style.transform = 'translate(0px, 0px)'
-    }
-
-    btn.addEventListener('mousemove', onMove)
-    btn.addEventListener('mouseleave', onLeave)
-
-    cleanups.push(() => {
-      btn.removeEventListener('mousemove', onMove)
-      btn.removeEventListener('mouseleave', onLeave)
+  observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        activeSection.value = entry.target.id
+      }
     })
-  })
+  }, options)
 
-  // --- OPTIONAL: Smooth Scroll untuk anchor (#...) ---
-  const anchors = document.querySelectorAll('a[href^="#"]')
-  anchors.forEach((a) => {
-    const onClick = (e) => {
-      const id = a.getAttribute('href')
-      const target = id ? document.querySelector(id) : null
-      if (!target) return
-
-      e.preventDefault()
-      target.scrollIntoView({ behavior: 'smooth' })
-    }
-
-    a.addEventListener('click', onClick)
-    cleanups.push(() => a.removeEventListener('click', onClick))
+  sections.forEach((section) => {
+    observer.observe(section)
   })
 })
 
-onBeforeUnmount(() => {
-  cleanups.forEach((fn) => fn())
-  cleanups = []
+onUnmounted(() => {
+  if (observer) observer.disconnect()
 })
 </script>
 
@@ -61,30 +39,55 @@ onBeforeUnmount(() => {
   <nav class="glass-nav">
     <div class="logo">WILDAN.</div>
     <ul>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="pricelist">Pricelist</a></li>
-      <li><a href="#contact" class="btn-hire">Let's Connect</a></li>
+      <li><a href="#about-section">About</a></li>
+      <li><a href="#work-section">Work</a></li>
+      <li><a href="#">Pricelist</a></li>
+      <li><a href="#social-section" class="btn-hire">Let's Connect</a></li>
     </ul>
+  </nav>
+
+  <nav class="mobile-nav">
+    <a
+      href="#about-section"
+      class="nav-icon"
+      :class="{ 'active-link': activeSection === 'about-section' }"
+    >
+      <i class="ph ph-user"></i>
+    </a>
+    <a
+      href="#work-section"
+      class="nav-icon center-icon"
+      :class="{ 'active-link': activeSection === 'work-section' }"
+    >
+      <i class="ph ph-squares-four"></i>
+    </a>
+    <a
+      href="#social-section"
+      class="nav-icon"
+      :class="{ 'active-link': activeSection === 'social-section' }"
+    >
+      <i class="ph ph-paper-plane-tilt"></i>
+    </a>
   </nav>
 
   <header class="hero">
     <div class="hero-content">
       <span class="badge">FULL STACK CREATIVE</span>
       <h1>Visuals by Heart.<br /><span class="text-gradient">Logic by Code.</span></h1>
-      <p>Photographer • Drone Pilot • Web Dev • AppSheet Expert</p>
+      <p>Videographer • Editor • Web Dev • AppSheet Expert</p>
     </div>
   </header>
 
-  <section id="work" class="container">
+  <section class="container">
     <div class="bento-grid">
-      <div class="card glass-card item-about">
+
+      <div id="about-section" class="glass-card item-about">
         <div class="about-text">
           <span class="tag">Who Am I?</span>
           <h2>Hi, I'm Wildan.</h2>
           <p>
-            I bridge the gap between human connection and digital experience.
-            As a Communication student passionate about UI/UX and Front-end Development, I don't just tell stories—I build the platforms where they live. Transforming complex ideas into intuitive, visually stunning realities.
+            I bridge the gap between human connection and digital experience. As a
+            Communication student passionate about UI/UX and Front-end Development.
           </p>
 
           <div class="stats">
@@ -101,7 +104,6 @@ onBeforeUnmount(() => {
 
         <div class="id-card-wrapper">
           <div class="lanyard-string"></div>
-
           <div class="hanging-card">
             <div class="card-header">
               <div class="hole"></div>
@@ -117,20 +119,22 @@ onBeforeUnmount(() => {
         </div>
       </div>
 
-      <router-link to="/cinematography" class="card glass-card item-main clickable-card">
-    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1506947411487-a56738267384?q=80&w=800');"></div>
-    <div class="card-content">
-        <span class="tag">Cinematography</span>
-        <h3>Videography Project</h3>
-    </div>
-</router-link>
-
-      <div class="card glass-card item-tech">
+      <router-link to="/cinematography" id="work-section" class="glass-card item-main clickable-card">
         <div
           class="card-bg"
-          style="
-            background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800');
-          "
+          style="background-image: url('https://images.unsplash.com/photo-1506947411487-a56738267384?q=80&w=800');"
+        ></div>
+        <div class="card-content">
+          <span class="tag">Videography</span>
+          <h3>Audio Visual</h3>
+          <p>High quality video service</p>
+        </div>
+      </router-link>
+
+      <div class="glass-card item-tech">
+        <div
+          class="card-bg"
+          style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800');"
         ></div>
         <div class="card-content">
           <span class="tag">Development</span>
@@ -139,42 +143,40 @@ onBeforeUnmount(() => {
         </div>
       </div>
 
-      <div class="card glass-card item-photo">
+      <div class="glass-card item-photo">
         <div
           class="card-bg"
-          style="
-            background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800');
-          "
+          style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800');"
         ></div>
         <div class="card-content">
           <span class="tag">Photography</span>
           <h3>Gallery</h3>
+          <p>Aesthetics in every frame</p>
         </div>
       </div>
 
-      <div class="card glass-card item-social">
+      <div id="social-section" class="glass-card item-social">
         <div class="social-header">
           <h3>Connect</h3>
-          <p>Cek repository & karya.</p>
+          <p>Work and Repository</p>
         </div>
         <div class="social-links">
-          <a href="https://behance.net/idan_abdll" target="_blank" class="magnetic-btn">
+          <a href="https://behance.net/idan_abdll" target="_blank" class="magnetic-btn btn-be">
             <i class="ph ph-behance-logo"></i>
             <span>Behance</span>
           </a>
-          <a href="https://github.com/amdwildanabdillah" target="_blank" class="magnetic-btn">
+
+          <a href="https://github.com/amdwildanabdillah" target="_blank" class="magnetic-btn btn-gh">
             <i class="ph ph-github-logo"></i>
             <span>GitHub</span>
           </a>
-          <a href="https://instagram.com/caramellattteeeee_" target="_blank" class="magnetic-btn">
+
+          <a href="https://instagram.com/caramellattteeeee_" target="_blank" class="magnetic-btn btn-ig">
             <i class="ph ph-instagram-logo"></i>
             <span>Instagram</span>
           </a>
-          <a
-            href="https://linkedin.com/in/wildan-abdillah-099a8b247"
-            target="_blank"
-            class="magnetic-btn"
-          >
+
+          <a href="https://linkedin.com/in/wildan-abdillah-099a8b247" target="_blank" class="magnetic-btn btn-li">
             <i class="ph ph-linkedin-logo"></i>
             <span>LinkedIn</span>
           </a>
@@ -189,5 +191,5 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-
+/* Kosong gapapa, CSS ada di global.css */
 </style>

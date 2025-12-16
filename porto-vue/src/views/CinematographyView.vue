@@ -14,8 +14,8 @@ const videos = ref([
   {
     type: 'youtube',
     id: 'vDXaoQyCoAs',
-    title: 'DUA SISI',
-    category: 'SHORT MOVIE'
+    title: 'Short Movie',
+    category: 'DUA SISI'
   },
 
   {
@@ -35,9 +35,9 @@ const videos = ref([
 
   {
     type: 'youtube',
-    id: 'vDXaoQyCoAs',
-    title: 'DUA SISI',
-    category: 'SHORT MOVIE'
+    id: 'pBeJKxubs6M',
+    title: 'Profile Video',
+    category: 'Profil Desa Wisata Ngabab'
   },
 
   // 1. BEHANCE (JADI LINK - BIAR RAPI)

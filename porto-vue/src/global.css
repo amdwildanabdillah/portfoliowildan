@@ -10,376 +10,260 @@
     --glow-purple: rgba(120, 58, 255, 0.4);
     --glow-cyan: rgba(0, 255, 209, 0.3);
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    font-family: 'General Sans', sans-serif;
-    overflow-x: hidden;
-    min-height: 100vh;
-}
+body { background-color: var(--bg-color); color: var(--text-main); font-family: 'General Sans', sans-serif; overflow-x: hidden; min-height: 100vh; }
 
 /* =========================================
-   2. BACKGROUND EFFECTS
+   2. COMPONENTS
    ========================================= */
-.ambient-glow {
-    position: fixed; width: 600px; height: 600px; border-radius: 50%;
-    filter: blur(120px); z-index: -1; opacity: 0.6; pointer-events: none;
-    animation: float 10s infinite ease-in-out alternate;
-}
+.ambient-glow { position: fixed; width: 600px; height: 600px; border-radius: 50%; filter: blur(120px); z-index: -1; opacity: 0.6; pointer-events: none; animation: float 10s infinite ease-in-out alternate; }
 .glow-purple { top: -150px; left: -100px; background: var(--glow-purple); }
 .glow-cyan { bottom: -150px; right: -100px; background: var(--glow-cyan); animation-delay: 2s; }
-@keyframes float {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(50px, 50px) scale(1.1); }
-}
-
-/* =========================================
-   3. TYPOGRAPHY & NAVBAR
-   ========================================= */
-h1, h2, h3 { font-family: 'Clash Display', sans-serif; font-weight: 600; }
-a { text-decoration: none; color: inherit; }
-
-.glass-nav {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 50px; position: fixed; width: 100%; top: 0; z-index: 100;
-    backdrop-filter: blur(10px); background: rgba(5,5,5,0.5); border-bottom: 1px solid var(--glass-border);
-}
-.glass-nav ul { display: flex; gap: 30px; list-style: none; }
-.btn-hire { border: 1px solid #fff; padding: 8px 20px; border-radius: 50px; transition: 0.3s; }
-.btn-hire:hover { background: #fff; color: #000; }
-
-/* =========================================
-   4. HERO SECTION
-   ========================================= */
-.hero {
-    height: auto; min-height: 50vh; display: flex;
-    justify-content: center; align-items: center; text-align: center;
-    position: relative; padding-top: 120px; padding-bottom: 40px;
-}
-.hero-content h1 { font-size: 4.5rem; line-height: 1.1; margin: 20px 0; }
-.text-gradient {
-    background: linear-gradient(to right, #ffffff, #b084ff);
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent; color: transparent;
-    padding-right: 5px; display: inline-block;
-}
-.badge {
-    border: 1px solid rgba(255,255,255,0.2); padding: 5px 15px;
-    border-radius: 20px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
-    background: rgba(255,255,255,0.05);
-}
-
-/* =========================================
-   5. BENTO GRID SYSTEM
-   ========================================= */
-.container { padding: 50px; max-width: 1400px; margin: 0 auto; }
-.bento-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto auto; gap: 20px;
-}
+@keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, 50px) scale(1.1); } }
 
 .glass-card {
     background: var(--glass-bg); backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border); border-radius: 24px; padding: 30px;
-    position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    border: 1px solid var(--glass-border); border-radius: 24px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    overflow: hidden;
 }
 .glass-card:hover { transform: translateY(-5px); border-color: rgba(255, 255, 255, 0.3); }
-.card-bg {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background-size: cover; background-position: center; opacity: 0.5; z-index: 0; transition: 0.5s;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0));
-}
-.glass-card:hover .card-bg { transform: scale(1.05); opacity: 0.7; }
-.card-content { position: relative; z-index: 1; pointer-events: none; }
-.tag {
-    background: rgba(255,255,255,0.1); padding: 6px 14px;
-    border-radius: 30px; font-size: 0.75rem; text-transform: uppercase;
-    display: inline-block; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.1);
-}
 
-.item-main { grid-column: span 2; grid-row: span 2; }
-.item-tech { grid-column: span 2; }
-.item-photo { grid-column: span 1; }
-.item-social { grid-column: span 1; }
+.tag { background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 30px; font-size: 0.75rem; text-transform: uppercase; display: inline-block; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.1); }
+.text-gradient { background: linear-gradient(to right, #ffffff, #b084ff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; display: inline-block; }
+.badge { border: 1px solid rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; background: rgba(255,255,255,0.05); }
 
 /* =========================================
-   6. FEATURE: ABOUT ME & CARD (LAYOUT FIX)
+   3. NAVBAR (FIX: CLEAN, NO BORDER, BIGGER FONT)
    ========================================= */
-.item-about {
-    grid-column: span 4; /* FULL LEBAR */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    /* GANTI INI BIAR TEKS DI KIRI, KARTU DI KANAN */
-    justify-content: space-between;
-    padding: 60px 80px;
-    gap: 50px;
-    overflow: hidden; /* Biar gak bocor */
+.glass-nav { 
+    display: flex; justify-content: space-between; align-items: center; 
+    padding: 20px 50px; 
+    position: fixed; width: 100%; top: 0; z-index: 100; 
+    
+    /* Background Agak Gelap Dikit Biar Teks Jelas */
+    background: rgba(5, 5, 5, 0.6); 
+    backdrop-filter: blur(10px); 
+    
+    /* NO BORDER BOTTOM (Sesuai Request) */
+    border-bottom: none; 
 }
 
-.about-text {
-    /* GANTI INI BIAR FLEKSIBEL */
-    flex: 1;
-    max-width: 650px; /* Batas maksimal lebar teks */
-    text-align: left;
-    z-index: 2;
+.glass-nav .logo { 
+    font-weight: 700; 
+    font-size: 1.5rem; 
+    color: #fff; 
+    letter-spacing: 1px;
 }
 
-.about-text h2 {
-    font-size: 3rem; /* Gedein dikit biar mantap */
-    line-height: 1.2;
-    margin: 15px 0;
-    background: linear-gradient(to right, #fff, #b084ff);
-    background-clip: text;
+.glass-nav ul { display: flex; gap: 40px; list-style: none; }
+
+/* INI PERBAIKANNYA MAS: HAPUS GARIS BAWAH */
+.glass-nav a { 
+    text-decoration: none !important; /* Paksa ilangin garis */
+    color: #ddd; 
+    transition: 0.3s; 
+    font-size: 1rem; 
+    font-weight: 500;
+}
+.glass-nav a:hover { color: #fff; }
+
+.btn-hire { border: 1px solid #fff; padding: 10px 25px; border-radius: 50px; transition: 0.3s; color: #fff !important; }
+.btn-hire:hover { background: #fff; color: #000 !important; }
+
+/* Hero adjustment */
+.hero { height: auto; min-height: 80vh; display: flex; justify-content: center; align-items: center; text-align: center; padding-top: 100px; }
+.hero-content h1 { font-size: 4.5rem; line-height: 1.1; margin: 20px 0; font-family: 'Clash Display', sans-serif; }
+/* =========================================
+   4. LAYOUT VERTICAL
+   ========================================= */
+.main-container {
+    max-width: 1200px; margin: 0 auto; padding: 0 20px;
+    display: flex; flex-direction: column; gap: 100px;
+    padding-bottom: 100px;
+}
+
+.section-block { scroll-margin-top: 100px; width: 100%; }
+.section-title { text-align: center; margin-bottom: 40px; }
+.section-title h2 { font-size: 2.5rem; font-family: 'Clash Display', sans-serif; }
+.section-title p { color: var(--text-muted); margin-top: 10px; }
+
+/* --- SECTION 1: ABOUT ME --- */
+.big-about-card {
+    padding: 60px;
+    display: flex; align-items: center; justify-content: space-between; gap: 50px;
+}
+.about-content { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 50px; }
+.about-text { flex: 1; text-align: left; }
+
+.about-text h2 { 
+    font-size: 3.5rem; 
+    font-family: 'Clash Display', sans-serif; 
+    margin: 15px 0; 
+    line-height: 1.1;
+    background: linear-gradient(to right, #ffffff, #b084ff);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-align: left;
+    color: transparent;
 }
-
-.about-text p {
-    font-size: 1rem;
-    color: var(--text-muted);
-    margin-bottom: 30px;
-    line-height: 1.6;
-    max-width: 90%; /* Biar paragraf gak kepanjangan */
-}
-
+.about-text p { font-size: 1rem; color: var(--text-muted); line-height: 1.6; max-width: 90%; margin-bottom: 30px; }
 .stats { display: flex; gap: 40px; }
-.stat-box h3 { font-size: 1.8rem; margin-bottom: 5px; color: #fff; }
-.stat-box p { font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; }
+.stat-box h3 { font-size: 2rem; margin-bottom: 5px; } 
+.stat-box p { color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; }
 
-/* WRAPPER KARTU GANTUNG */
-.id-card-wrapper {
-    position: relative;
-    flex: 0 0 200px; /* Kunci lebar area kartu biar gak kegencet */
-    height: auto;
-    min-height: 300px;
-    display: flex; justify-content: center; perspective: 1000px;
+/* --- LANYARD (REVISI: PROPORSI KTP/ATM) --- */
+.id-card-wrapper { 
+    flex: 0 0 240px; 
+    height: 380px; 
+    display: flex; justify-content: center; 
+    perspective: 1000px; 
+    position: relative; 
+}
+/* Tali Lanyard */
+.lanyard-string { 
+    position: absolute; 
+    top: -80px; 
+    width: 2px; 
+    height: 100px; 
+    background: rgba(255,255,255,0.3); /* Tali lebih subtle */
+    z-index: 10; 
 }
 
-/* TALI SIMPLE (GRADIENT FADE) */
-.lanyard-string {
-    position: absolute; top: -100px; width: 2px; height: 120px;
-    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.4)); z-index: 10;
-}
-
-/* KARTU GANTUNG (DESAIN RAPI) */
-/* KARTU GANTUNG (FIX RATA TENGAH) */
-.hanging-card {
-    position: relative;
-    top: 20px;
-    width: 160px;
-
-    /* GANTI TINGGI BIAR PAS */
-    height: 100%;       /* Ikutin tinggi wadahnya */
-    min-height: 260px;  /* Minimal segini biar barcode gak kepotong */
-
-    background: rgba(255, 255, 255, 0.07);
+/* KARTU ID */
+.hanging-card { 
+    position: relative; top: 20px;
+    
+    /* REVISI UKURAN: Lebih lebar (Standard Ratio) */
+    width: 220px; 
+    min-height: 340px; 
+    
+    background: rgba(255, 255, 255, 0.07); 
     backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 15px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-
-    /* INI KUNCINYA MAS: */
-    justify-content: center; /* Biar konten ada di TENGAH vertikal */
-    gap: 15px;               /* Jarak antar elemen (Foto ke Nama, Nama ke Barcode) */
-
-    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    border-radius: 16px;
+    
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; /* Konten Tengah */
+    gap: 15px; 
+    
+    padding: 25px; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    transform-origin: top center;
-    animation: swing 3s infinite ease-in-out;
+    transform-origin: top center; 
+    animation: swing 3s infinite ease-in-out; 
+    text-align: center;
 }
-@keyframes swing { 0% { transform: rotate(5deg); } 50% { transform: rotate(-5deg); } 100% { transform: rotate(5deg); } }
+@keyframes swing { 0% { transform: rotate(3deg); } 50% { transform: rotate(-3deg); } 100% { transform: rotate(3deg); } }
 .hanging-card:hover { animation-play-state: paused; border-color: #b084ff; }
 
-/* ISI KARTU */
-.card-header, .card-body { width: 100%; display: flex; flex-direction: column; align-items: center; }
-.hole { width: 30px; height: 5px; background: rgba(0,0,0,0.5); border-radius: 10px; margin-bottom: 10px; }
-.role { font-size: 0.6rem; letter-spacing: 2px; background: #b084ff; color: white; padding: 2px 8px; border-radius: 4px; font-weight: 700; margin-bottom: 10px; display: inline-block;}
-.profile-pic { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.5); margin-bottom: 10px; display: block; }
-.hanging-card h3 { font-size: 1.2rem; margin-bottom: 2px; width: 100%; }
-.hanging-card p { font-size: 0.8rem; color: var(--text-muted); width: 100%; }
+/* ISI LANYARD */
+.card-header, .card-body { display: flex; flex-direction: column; align-items: center; width: 100%; }
 
-/* BARCODE KOSMETIK */
-.barcode {
-    margin-top: 20px; width: 100%;
-    font-family: 'Courier New', monospace; font-weight: 900; font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.5); letter-spacing: -2px; transform: scaleY(0.6);
-}
+/* HOLE HILANG (Request) */
+.hole { display: none; }
 
-/* =========================================
-   7. SOCIAL & FOOTER
-   ========================================= */
-.item-social { justify-content: space-between; padding: 25px; }
-.social-links { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-.magnetic-btn {
-    display: flex; align-items: center; gap: 12px; padding: 14px 20px;
-    background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 12px;
-    font-size: 0.9rem; font-weight: 500; transition: background 0.2s, border 0.2s;
+.role { 
+    font-size: 0.7rem; 
+    letter-spacing: 2px; 
+    background: #b084ff; 
+    color: white; 
+    padding: 4px 10px; 
+    border-radius: 4px; 
+    font-weight: 700; 
+    margin-bottom: 10px; 
 }
-.magnetic-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); }
-footer { text-align: center; padding: 50px; color: var(--text-muted); font-size: 0.8rem; }
+.profile-pic { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.5); margin-bottom: 10px; display: block; }
+.hanging-card h3 { font-size: 1.4rem; margin-bottom: 2px; width: 100%; }
+.hanging-card p { font-size: 0.9rem; color: var(--text-muted); width: 100%; margin: 0; }
+.barcode { margin-top: 15px; width: 100%; font-family: 'Courier New', monospace; font-weight: 900; font-size: 1.5rem; color: rgba(255, 255, 255, 0.5); letter-spacing: -2px; transform: scaleY(0.6); }
 
-/* =========================================
-   8. MEDIA QUERIES (RESPONSIVE)
-   ========================================= */
-@media (max-width: 1024px) {
-    .bento-grid { grid-template-columns: repeat(2, 1fr); }
-    .item-main, .item-about { grid-column: span 2; }
-}
-@media (max-width: 900px) {
-    /* Khusus About Me di HP/Tablet Kecil */
-    .item-about {
-        flex-direction: column-reverse; /* Teks di bawah, Kartu di atas */
-        text-align: center;
-        padding: 40px 20px;
-        gap: 40px;
-    }
-    .about-text { width: 100%; max-width: 100%; text-align: center; }
-    .about-text h2 { text-align: center; font-size: 2rem; }
-    .about-text p { max-width: 100%; }
-    .stats { justify-content: center; }
-}
-@media (max-width: 768px) {
-    .hero-content h1 { font-size: 2.5rem; }
-    .glass-nav ul { display: none; }
-    .bento-grid { display: flex; flex-direction: column; height: auto; }
-}
+/* --- SECTION 2: WORKS --- */
+.works-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.work-card { height: 350px; position: relative; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; text-decoration: none; color: inherit; }
+.card-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0.5; transition: 0.5s; mask-image: linear-gradient(to bottom, black, transparent); }
+.work-card:hover .card-bg { transform: scale(1.05); opacity: 0.8; }
+.card-content { position: relative; z-index: 2; }
+.work-card h3 { font-size: 1.5rem; margin-top: 5px; font-family: 'Clash Display', sans-serif; }
 
-.clickable-card {
-  text-decoration: none;
-  cursor: pointer;
-  color: inherit;
-  display: flex;
-}
+/* --- SECTION 3: CONNECT --- */
+.social-card-full { padding: 50px; text-align: center; max-width: 800px; margin: 0 auto; }
+.social-text { margin-bottom: 40px; }
+.social-text h2 { font-size: 2.5rem; font-family: 'Clash Display', sans-serif;
+  background: linear-gradient(to right, #ffffff, #b084ff);
+-webkit-background-clip: text; background-clip: text;
+-webkit-text-fill-color: transparent; color: transparent;}
+.social-links-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 600px; margin: 0 auto;}
+.magnetic-btn { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 15px 25px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; transition: 0.3s; text-decoration: none; font-size: 1rem; font-weight: 500; }
+.btn-be:hover { border-color: #1769ff; color: #1769ff; box-shadow: 0 0 15px rgba(23,105,255,0.4); }
+.btn-gh:hover { border-color: #fff; color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.3); }
+.btn-ig:hover { border-color: #d62976; color: #d62976; box-shadow: 0 0 15px rgba(214,41,118,0.4); }
+.btn-li:hover { border-color: #0a66c2; color: #0a66c2; box-shadow: 0 0 15px rgba(10,102,194,0.4); }
 
 /* =========================================
-   9. SOCIAL BUTTON COLORS (NEON EFFECT)
+   5. MOBILE & RESPONSIVE (FIX: LEGA & FIT)
    ========================================= */
-
-/* Transisi biar warnanya gak kaget */
-.magnetic-btn {
-    transition: all 0.3s ease;
-}
-
-/* 1. BEHANCE (Biru Elektrik) */
-.btn-be:hover {
-    border-color: #1769ff;
-    color: #1769ff;
-    background: rgba(23, 105, 255, 0.1);
-    box-shadow: 0 0 20px rgba(23, 105, 255, 0.4); /* Efek Neon */
-}
-
-/* 2. GITHUB (Putih Bersih / Abu Terang) */
-.btn-gh:hover {
-    border-color: #ffffff;
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-}
-
-/* 3. INSTAGRAM (Pink Magenta) */
-.btn-ig:hover {
-    border-color: #d62976;
-    color: #d62976;
-    background: rgba(214, 41, 118, 0.1);
-    box-shadow: 0 0 20px rgba(214, 41, 118, 0.4);
-}
-
-/* 4. LINKEDIN (Biru Profesional) */
-.btn-li:hover {
-    border-color: #0a66c2;
-    color: #0a66c2;
-    background: rgba(10, 102, 194, 0.1);
-    box-shadow: 0 0 20px rgba(10, 102, 194, 0.4);
-}
-
-/* =========================================
-   10. MOBILE FLOATING NAVIGATION (MENU HP)
-   ========================================= */
-/* Default: Sembunyi di Laptop */
 .mobile-nav { display: none; }
 
-/* Muncul cuma di HP */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+    /* 1. CONTAINER UTAMA (Jarak Pinggir Layar) */
+    .main-container {
+        padding: 0 15px; /* Dikecilin biar gak boros tempat */
+        gap: 60px; /* Jarak antar section didempetin dikit */
+    }
+
+    /* 2. ABOUT CARD (DIET PADDING) */
+    .big-about-card { 
+        flex-direction: column-reverse; 
+        text-align: center; 
+        padding: 30px 20px !important; /* Kiri Kanan cuma 20px! */
+    }
+    .about-content { flex-direction: column-reverse; gap: 30px; }
+    .about-text { text-align: center; }
+    .about-text h2 { font-size: 2rem; }
+    .about-text p { margin: 0 auto 30px; }
+    .stats { justify-content: center; }
+
+    /* 3. WORKS GRID (1 Kolom) */
+    .works-grid { grid-template-columns: 1fr; }
+    
+    /* 4. CONNECT CARD (DIET PADDING) */
+    .social-card-full {
+        padding: 30px 20px !important; /* PENTING: Biar tombol gak kejepit */
+    }
+    .social-links-row { grid-template-columns: 1fr; } /* Tombol jadi stack */
+
+    /* Hero Text */
+    .hero-content h1 { font-size: 2.5rem; }
+    .glass-nav ul { display: none; } 
+    
+    /* 5. MOBILE NAV (BULAT & RAPI) */
     .mobile-nav {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-
-        position: fixed;
-        bottom: 20px;    /* Melayang di bawah */
-        left: 50%;
-        transform: translateX(-50%);
-
-        width: 85%;      /* Lebar menu */
-        height: 65px;
-
-        /* Efek Kaca Gelap */
-        background: rgba(20, 20, 20, 0.8);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 50px;
-
-        z-index: 1000;
+        display: flex; justify-content: space-around; align-items: center;
+        position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+        width: 85%; max-width: 350px; height: 60px; /* Lebar max dibatesin biar gak melar jelek */
+        background: rgba(20,20,20,0.8); backdrop-filter: blur(20px);
+        border: 1px solid rgba(255,255,255,0.2); border-radius: 50px; z-index: 1000;
         box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
-
-    /* Style Icon */
     .nav-icon {
-        color: #888;
-        font-size: 1.8rem;
-        transition: 0.3s;
-        display: flex; align-items: center; justify-content: center;
         width: 50px; height: 50px; border-radius: 50%;
-        text-decoration: none;
+        display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; text-decoration: none;
+        color: #888; font-size: 1.5rem; transition: 0.3s;
     }
-
-    /* Icon Tengah (Work) Dikasih Spesial */
-    .center-icon {
-        background: rgba(255, 255, 255, 0.1);
-        color: #fff;
-        border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    /* Efek Pencet */
-    .nav-icon:active, .nav-icon:hover {
-        color: #b084ff;
+    .nav-icon.active-link {
+        color: #b084ff; text-shadow: 0 0 10px rgba(176,132,255,0.6);
         transform: scale(1.1);
     }
-    .center-icon:active, .center-icon:hover {
-        background: #b084ff;
-        color: #fff;
-        box-shadow: 0 0 15px rgba(176, 132, 255, 0.5);
+    .center-icon {
+        border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1);
+    }
+    .center-icon.active-link {
+        color: #fff; background: #b084ff;
+        box-shadow: 0 0 15px rgba(176,132,255,0.5); border-color: transparent;
     }
 }
-
-/* =========================================
-   TAMBAHAN: ACTIVE STATE (SCROLL SPY)
-   ========================================= */
-
-/* Kalau lagi aktif, warnanya jadi Ungu Neon */
-.nav-icon.active-link {
-    color: #b084ff;
-    transform: scale(1.1); /* Sedikit membesar */
-    text-shadow: 0 0 10px rgba(176, 132, 255, 0.6); /* Efek cahaya */
-}
-
-/* Khusus icon tengah, kalau aktif backgroundnya juga nyala */
-.center-icon.active-link {
-    background: #b084ff;
-    color: #fff;
-    box-shadow: 0 0 20px rgba(176, 132, 255, 0.6);
-    border-color: transparent;
-}
+footer { text-align: center; color: var(--text-muted); font-size: 0.8rem; padding-bottom: 100px; }
+.clickable-card { cursor: pointer; display: flex; }

@@ -61,15 +61,18 @@ onUnmounted(() => {
     <a href="#" @click.prevent="scrollToSection('about-section')" class="nav-icon" :class="{ 'active-link': activeSection === 'about-section' }">
       <i class="ph ph-user"></i>
     </a>
+
     <a href="#" @click.prevent="scrollToSection('work-section')" class="nav-icon center-icon" :class="{ 'active-link': activeSection === 'work-section' }">
       <i class="ph ph-squares-four"></i>
     </a>
+
+    <a href="#" @click.prevent="scrollToSection('social-section')" class="nav-icon" :class="{ 'active-link': activeSection === 'social-section' }">
+      <i class="ph ph-paper-plane-tilt"></i>
+    </a>
+
     <router-link to="/resume" class="nav-icon">
       <i class="ph ph-file-text"></i>
     </router-link>
-    <a href="#" @click.prevent="scrollToSection('https://drive.google.com/file/d/LINK_CV_KAMU/view?usp=sharing')" target="_blank" class="nav-icon">
-      <i class="ph ph-file-text"></i>
-    </a>
   </nav>
 
   <header class="hero">

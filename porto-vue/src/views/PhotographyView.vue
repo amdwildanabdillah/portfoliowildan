@@ -9,10 +9,10 @@ const projects = ref([
     id: 1,
     title: 'Wedding: Ilham & Hana',
     category: 'COUPLE',
-    thumbnail: '../assets/wed-cov.jpg',
+    thumbnail: '/wed-cov.jpg',
     gallery: [
-      '../assets/wed1.jpg',
-      '../assets/wed2.jpg',
+      '/wed1.jpg',
+      '/wed2.jpg',
       'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1200',
       'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1200'
     ]

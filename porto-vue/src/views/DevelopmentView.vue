@@ -6,31 +6,32 @@ const devProjects = ref([
   {
     id: 1,
     title: 'Storydesto',
-    type: 'Web Application',
-    desc: 'Platform marketplace untuk vendor fotografi. Memudahkan klien mencari dan booking fotografer sesuai budget dan style. Dilengkapi fitur booking calendar dan payment gateway.',
+    type: 'Marketplace Platform',
+    desc: 'A digital marketplace connecting photography vendors with clients. Features a Smart Booking System, integrated Payment Gateway, and a comprehensive Admin Dashboard to streamline visual service transactions.',
     stack: ['Laravel', 'Vue.js', 'MySQL', 'Bootstrap'], // Tech Stack
-    image: '../assets/coverdesto.png', // Nanti ganti screenshot webnya
+    image: '/coverdesto.png', // Nanti ganti screenshot webnya
     link: 'https://portfolio-storydesto.netlify.app/', // Link asli (kalau ada)
-    github: 'https://github.com/amdwildanabdillah' // Link repo
+    github: 'https://github.com/amdwildanabdillah/storydesto' // Link repo
   },
   {
     id: 2,
-    title: 'Portfolio',
-    type: 'Website',
-    desc: 'Website portfolio pribadi yang menampilkan proyek-proyek dan keterampilan teknis.',
+    title: "Wildan's Portfolio",
+    type: 'Frontend Development',
+    desc: 'An interactive portfolio featuring a modern Glassmorphism design. Built with Vue.js as a Single Page Application (SPA) to deliver a fast, smooth, and fully responsive user experience across all devices.',
     stack: ['Vue.js', 'HTML', 'CSS'],
-    image: '../assets/webwildan.png', // Nanti ganti screenshot HP
+    image: '/webwildan.png', // Nanti ganti screenshot HP
     link: 'https://portfoliowildan.my.id/', // Link asli (kalau ada)
-    github: null // AppSheet biasanya gak ada github
+    github: 'https://github.com/amdwildanabdillah/amdwildanabdillah.github.io' // AppSheet biasanya gak ada github
   },
   {
     id: 3,
     title: "D'Production Surabaya",
     type: 'Company Profile',
-    desc: 'Landing page profesional untuk production house. Fokus pada tampilan visual yang elegan, galeri portofolio video, dan performa loading yang cepat untuk SEO.',
+    desc: 'Official landing page for a creative production house. Designed to professionally showcase video showreels, detail services, and enhance brand credibility with an elegant layout and SEO optimization.',
     stack: ['HTML', 'CSS', 'Javascript'],
-    image: '../assets/dproduction.png',
+    image: '/dproduction.png',
     link: 'https://dproductionsub.netlify.app/',
+    github: 'https://github.com/amdwildanabdillah/dproductionsub'
   }
 ])
 </script>
@@ -86,9 +87,6 @@ const devProjects = ref([
                 </div>
 
                 <div class="action-buttons">
-                    <a v-if="item.link !== '#'" :href="item.link" target="_blank" class="btn-primary">
-                        Live Demo
-                    </a>
                     <a v-if="item.github" :href="item.github" target="_blank" class="btn-secondary">
                         <i class="ph ph-github-logo"></i> Repository
                     </a>

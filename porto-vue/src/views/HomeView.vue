@@ -1,6 +1,14 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
+// FUNGSI SCROLL MANUAL (ANTI BLANK PAGE)
+const scrollToSection = (id) => {
+  const element = document.getElementById(id)
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' })
+  }
+}
+
 // --- OTAK SCROLL SPY (CCTV CANGGIH) ---
 const activeSection = ref('')
 let observer = null
@@ -39,22 +47,28 @@ onUnmounted(() => {
   <nav class="glass-nav">
     <div class="logo">WILDAN.</div>
     <ul>
-      <li><a href="#about-section">About</a></li>
-      <li><a href="#work-section">Work</a></li>
-      <li><a href="#">Pricelist</a></li>
-      <li><a href="#social-section" class="btn-hire">Let's Connect</a></li>
+      <li><a href="#" @click.prevent="scrollToSection('about-section')">About</a></li>
+
+      <li><a href="#" @click.prevent="scrollToSection('work-section')">Work</a></li>
+
+      <li><router-link to="/resume">Resume</router-link></li>
+
+      <li><a href="#" @click.prevent="scrollToSection('social-section')" class="btn-hire">Let's Connect</a></li>
     </ul>
   </nav>
 
   <nav class="mobile-nav">
-    <a href="#about-section" class="nav-icon" :class="{ 'active-link': activeSection === 'about-section' }">
+    <a href="#" @click.prevent="scrollToSection('about-section')" class="nav-icon" :class="{ 'active-link': activeSection === 'about-section' }">
       <i class="ph ph-user"></i>
     </a>
-    <a href="#work-section" class="nav-icon center-icon" :class="{ 'active-link': activeSection === 'work-section' }">
+    <a href="#" @click.prevent="scrollToSection('work-section')" class="nav-icon center-icon" :class="{ 'active-link': activeSection === 'work-section' }">
       <i class="ph ph-squares-four"></i>
     </a>
-    <a href="#social-section" class="nav-icon" :class="{ 'active-link': activeSection === 'social-section' }">
-      <i class="ph ph-paper-plane-tilt"></i>
+    <router-link to="/resume" class="nav-icon">
+      <i class="ph ph-file-text"></i>
+    </router-link>
+    <a href="#" @click.prevent="scrollToSection('https://drive.google.com/file/d/LINK_CV_KAMU/view?usp=sharing')" target="_blank" class="nav-icon">
+      <i class="ph ph-file-text"></i>
     </a>
   </nav>
 
@@ -111,8 +125,8 @@ onUnmounted(() => {
           <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1506947411487-a56738267384?q=80&w=800');"></div>
           <div class="card-content">
             <span class="tag">Videography</span>
-            <h3>Audio Visual</h3>
-            <p>High quality video service</p>
+            <h3>Cinematography</h3>
+            <p>Visual storytelling & motion</p>
           </div>
         </router-link>
 
@@ -120,8 +134,8 @@ onUnmounted(() => {
           <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800');"></div>
           <div class="card-content">
             <span class="tag">Development</span>
-            <h3>AppSheet & Web</h3>
-            <p>Solusi digital terintegrasi.</p>
+            <h3>Web & App</h3>
+            <p>Code, logic, and creativity.</p>
           </div>
         </router-link>
 
@@ -130,7 +144,7 @@ onUnmounted(() => {
           <div class="card-content">
             <span class="tag">Photography</span>
             <h3>Gallery</h3>
-            <p>Aesthetics in every frame</p>
+            <p>Timeless moments in frames.</p>
           </div>
         </router-link>
       </div>
@@ -147,7 +161,9 @@ onUnmounted(() => {
           <a href="https://behance.net/idan_abdll" target="_blank" class="magnetic-btn btn-be"><i class="ph ph-behance-logo"></i> Behance</a>
           <a href="https://github.com/amdwildanabdillah" target="_blank" class="magnetic-btn btn-gh"><i class="ph ph-github-logo"></i> GitHub</a>
           <a href="https://instagram.com/caramellattteeeee_" target="_blank" class="magnetic-btn btn-ig"><i class="ph ph-instagram-logo"></i> Instagram</a>
-          <a href="https://linkedin.com/in/wildan-abdillah-099a8b247" target="_blank" class="magnetic-btn btn-li"><i class="ph ph-linkedin-logo"></i> LinkedIn</a>
+          <a href="https://discord.com/users/811059299429384249" target="_blank" class="magnetic-btn btn-discord">
+    <i class="ph ph-discord-logo"></i> Discord
+</a>
         </div>
       </div>
     </section>

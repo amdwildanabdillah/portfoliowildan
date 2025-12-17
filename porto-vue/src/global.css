@@ -37,34 +37,34 @@ body { background-color: var(--bg-color); color: var(--text-main); font-family: 
 /* =========================================
    3. NAVBAR (FIX: CLEAN, NO BORDER, BIGGER FONT)
    ========================================= */
-.glass-nav { 
-    display: flex; justify-content: space-between; align-items: center; 
-    padding: 20px 50px; 
-    position: fixed; width: 100%; top: 0; z-index: 100; 
-    
+.glass-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 50px;
+    position: fixed; width: 100%; top: 0; z-index: 100;
+
     /* Background Agak Gelap Dikit Biar Teks Jelas */
-    background: rgba(5, 5, 5, 0.6); 
-    backdrop-filter: blur(10px); 
-    
+    background: rgba(5, 5, 5, 0.6);
+    backdrop-filter: blur(10px);
+
     /* NO BORDER BOTTOM (Sesuai Request) */
-    border-bottom: none; 
+    border-bottom: none;
 }
 
-.glass-nav .logo { 
-    font-weight: 700; 
-    font-size: 1.5rem; 
-    color: #fff; 
+.glass-nav .logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #fff;
     letter-spacing: 1px;
 }
 
 .glass-nav ul { display: flex; gap: 40px; list-style: none; }
 
 /* INI PERBAIKANNYA MAS: HAPUS GARIS BAWAH */
-.glass-nav a { 
+.glass-nav a {
     text-decoration: none !important; /* Paksa ilangin garis */
-    color: #ddd; 
-    transition: 0.3s; 
-    font-size: 1rem; 
+    color: #ddd;
+    transition: 0.3s;
+    font-size: 1rem;
     font-weight: 500;
 }
 .glass-nav a:hover { color: #fff; }
@@ -97,10 +97,10 @@ body { background-color: var(--bg-color); color: var(--text-main); font-family: 
 .about-content { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 50px; }
 .about-text { flex: 1; text-align: left; }
 
-.about-text h2 { 
-    font-size: 3.5rem; 
-    font-family: 'Clash Display', sans-serif; 
-    margin: 15px 0; 
+.about-text h2 {
+    font-size: 3.5rem;
+    font-family: 'Clash Display', sans-serif;
+    margin: 15px 0;
     line-height: 1.1;
     background: linear-gradient(to right, #ffffff, #b084ff);
     -webkit-background-clip: text;
@@ -110,50 +110,50 @@ body { background-color: var(--bg-color); color: var(--text-main); font-family: 
 }
 .about-text p { font-size: 1rem; color: var(--text-muted); line-height: 1.6; max-width: 90%; margin-bottom: 30px; }
 .stats { display: flex; gap: 40px; }
-.stat-box h3 { font-size: 2rem; margin-bottom: 5px; } 
+.stat-box h3 { font-size: 2rem; margin-bottom: 5px; }
 .stat-box p { color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; }
 
 /* --- LANYARD (REVISI: PROPORSI KTP/ATM) --- */
-.id-card-wrapper { 
-    flex: 0 0 240px; 
-    height: 380px; 
-    display: flex; justify-content: center; 
-    perspective: 1000px; 
-    position: relative; 
+.id-card-wrapper {
+    flex: 0 0 240px;
+    height: 380px;
+    display: flex; justify-content: center;
+    perspective: 1000px;
+    position: relative;
 }
 /* Tali Lanyard */
-.lanyard-string { 
-    position: absolute; 
-    top: -80px; 
-    width: 2px; 
-    height: 100px; 
+.lanyard-string {
+    position: absolute;
+    top: -80px;
+    width: 2px;
+    height: 100px;
     background: rgba(255,255,255,0.3); /* Tali lebih subtle */
-    z-index: 10; 
+    z-index: 10;
 }
 
 /* KARTU ID */
-.hanging-card { 
+.hanging-card {
     position: relative; top: 20px;
-    
+
     /* REVISI UKURAN: Lebih lebar (Standard Ratio) */
-    width: 220px; 
-    min-height: 340px; 
-    
-    background: rgba(255, 255, 255, 0.07); 
+    width: 220px;
+    min-height: 340px;
+
+    background: rgba(255, 255, 255, 0.07);
     backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2); 
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
-    
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center; /* Konten Tengah */
-    gap: 15px; 
-    
-    padding: 25px; 
+    gap: 15px;
+
+    padding: 25px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    transform-origin: top center; 
-    animation: swing 3s infinite ease-in-out; 
+    transform-origin: top center;
+    animation: swing 3s infinite ease-in-out;
     text-align: center;
 }
 @keyframes swing { 0% { transform: rotate(3deg); } 50% { transform: rotate(-3deg); } 100% { transform: rotate(3deg); } }
@@ -165,15 +165,15 @@ body { background-color: var(--bg-color); color: var(--text-main); font-family: 
 /* HOLE HILANG (Request) */
 .hole { display: none; }
 
-.role { 
-    font-size: 0.7rem; 
-    letter-spacing: 2px; 
-    background: #b084ff; 
-    color: white; 
-    padding: 4px 10px; 
-    border-radius: 4px; 
-    font-weight: 700; 
-    margin-bottom: 10px; 
+.role {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    background: #b084ff;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 .profile-pic { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.5); margin-bottom: 10px; display: block; }
 .hanging-card h3 { font-size: 1.4rem; margin-bottom: 2px; width: 100%; }
@@ -200,7 +200,7 @@ body { background-color: var(--bg-color); color: var(--text-main); font-family: 
 .btn-be:hover { border-color: #1769ff; color: #1769ff; box-shadow: 0 0 15px rgba(23,105,255,0.4); }
 .btn-gh:hover { border-color: #fff; color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.3); }
 .btn-ig:hover { border-color: #d62976; color: #d62976; box-shadow: 0 0 15px rgba(214,41,118,0.4); }
-.btn-li:hover { border-color: #0a66c2; color: #0a66c2; box-shadow: 0 0 15px rgba(10,102,194,0.4); }
+.btn-discord:hover { border-color: #5865F2; color: #5865F2; box-shadow: 0 0 15px rgba(88,10,194,0.4); }
 
 /* =========================================
    5. MOBILE & RESPONSIVE (FIX: LEGA & FIT)
@@ -215,9 +215,9 @@ body { background-color: var(--bg-color); color: var(--text-main); font-family: 
     }
 
     /* 2. ABOUT CARD (DIET PADDING) */
-    .big-about-card { 
-        flex-direction: column-reverse; 
-        text-align: center; 
+    .big-about-card {
+        flex-direction: column-reverse;
+        text-align: center;
         padding: 30px 20px !important; /* Kiri Kanan cuma 20px! */
     }
     .about-content { flex-direction: column-reverse; gap: 30px; }
@@ -228,7 +228,7 @@ body { background-color: var(--bg-color); color: var(--text-main); font-family: 
 
     /* 3. WORKS GRID (1 Kolom) */
     .works-grid { grid-template-columns: 1fr; }
-    
+
     /* 4. CONNECT CARD (DIET PADDING) */
     .social-card-full {
         padding: 30px 20px !important; /* PENTING: Biar tombol gak kejepit */
@@ -237,33 +237,43 @@ body { background-color: var(--bg-color); color: var(--text-main); font-family: 
 
     /* Hero Text */
     .hero-content h1 { font-size: 2.5rem; }
-    .glass-nav ul { display: none; } 
-    
-    /* 5. MOBILE NAV (BULAT & RAPI) */
+    .glass-nav ul { display: none; }
+
+    /* 5. MOBILE NAV (CLEAN & MINIMALIS) */
     .mobile-nav {
         display: flex; justify-content: space-around; align-items: center;
         position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-        width: 85%; max-width: 350px; height: 60px; /* Lebar max dibatesin biar gak melar jelek */
-        background: rgba(20,20,20,0.8); backdrop-filter: blur(20px);
-        border: 1px solid rgba(255,255,255,0.2); border-radius: 50px; z-index: 1000;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        width: 85%; max-width: 350px; height: 60px;
+        background: rgba(15, 15, 15, 0.9); /* Lebih gelap dikit biar elegan */
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 50px;
+        z-index: 1000;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     }
+
     .nav-icon {
-        width: 50px; height: 50px; border-radius: 50%;
-        display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; text-decoration: none;
-        color: #888; font-size: 1.5rem; transition: 0.3s;
+        /* FIX UKURAN: Hapus width 100% yang tadi bikin konflik */
+        width: 50px; height: 50px;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        text-decoration: none;
+        color: #666; /* Warna default abu gelap (inactive) */
+        font-size: 1.5rem;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animasi membal dikit */
+
+        /* HAPUS BACKGROUND & BORDER (PENTING) */
+        background: transparent !important;
+        border: none !important;
     }
+
     .nav-icon.active-link {
-        color: #b084ff; text-shadow: 0 0 10px rgba(176,132,255,0.6);
-        transform: scale(1.1);
+        color: #b084ff; /* Ungu Neon */
+        text-shadow: 0 0 15px rgba(176,132,255,0.8); /* Efek Cahaya */
+        transform: translateY(-5px) scale(1.15); /* Naik ke atas dikit + Membesar */
     }
-    .center-icon {
-        border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1);
-    }
-    .center-icon.active-link {
-        color: #fff; background: #b084ff;
-        box-shadow: 0 0 15px rgba(176,132,255,0.5); border-color: transparent;
-    }
+
+    /* Class center-icon dihapus style khususnya biar seragam sama yang lain */
 }
 footer { text-align: center; color: var(--text-muted); font-size: 0.8rem; padding-bottom: 100px; }
 .clickable-card { cursor: pointer; display: flex; }

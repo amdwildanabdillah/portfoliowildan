@@ -9,7 +9,7 @@ const devProjects = ref([
     type: 'Web Application',
     desc: 'Platform marketplace untuk vendor fotografi. Memudahkan klien mencari dan booking fotografer sesuai budget dan style. Dilengkapi fitur booking calendar dan payment gateway.',
     stack: ['Laravel', 'Vue.js', 'MySQL', 'Bootstrap'], // Tech Stack
-    image: 'src/assets/coverdesto.png', // Nanti ganti screenshot webnya
+    image: '../assets/coverdesto.png', // Nanti ganti screenshot webnya
     link: 'https://portfolio-storydesto.netlify.app/', // Link asli (kalau ada)
     github: 'https://github.com/amdwildanabdillah' // Link repo
   },
@@ -19,7 +19,7 @@ const devProjects = ref([
     type: 'Website',
     desc: 'Website portfolio pribadi yang menampilkan proyek-proyek dan keterampilan teknis.',
     stack: ['Vue.js', 'HTML', 'CSS'],
-    image: 'src/assets/webwildan.png', // Nanti ganti screenshot HP
+    image: '../assets/webwildan.png', // Nanti ganti screenshot HP
     link: 'https://portfoliowildan.my.id/', // Link asli (kalau ada)
     github: null // AppSheet biasanya gak ada github
   },
@@ -29,7 +29,7 @@ const devProjects = ref([
     type: 'Company Profile',
     desc: 'Landing page profesional untuk production house. Fokus pada tampilan visual yang elegan, galeri portofolio video, dan performa loading yang cepat untuk SEO.',
     stack: ['HTML', 'CSS', 'Javascript'],
-    image: 'src/assets/dproduction.png',
+    image: '../assets/dproduction.png',
     link: 'https://dproductionsub.netlify.app/',
   }
 ])

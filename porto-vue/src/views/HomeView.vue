@@ -103,7 +103,7 @@ onUnmounted(() => {
     <section id="work-section" class="section-block">
       <div class="section-title">
         <h2>Selected <span class="text-gradient">Works</span></h2>
-        <p>Highlight karya terbaik saya.</p>
+        <p>Highlights of my best work.</p>
       </div>
 
       <div class="works-grid">
@@ -116,23 +116,23 @@ onUnmounted(() => {
           </div>
         </router-link>
 
-        <div class="glass-card work-card">
+        <router-link to="/development" class="glass-card work-card clickable-card">
           <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800');"></div>
           <div class="card-content">
             <span class="tag">Development</span>
             <h3>AppSheet & Web</h3>
             <p>Solusi digital terintegrasi.</p>
           </div>
-        </div>
+        </router-link>
 
-        <div class="glass-card work-card">
+        <router-link to="/photography" class="glass-card work-card clickable-card">
           <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800');"></div>
           <div class="card-content">
             <span class="tag">Photography</span>
             <h3>Gallery</h3>
             <p>Aesthetics in every frame</p>
           </div>
-        </div>
+        </router-link>
       </div>
     </section>
 

@@ -8,7 +8,7 @@ const videos = ref([
     type: 'youtube',
     id: 'gDOdVnRsZ0E',
     title: 'Cinematic Vlog',
-    category: 'COMPETITION'
+    category: 'After Movie PBAK UINSA 2022'
   },
 
   {
@@ -27,10 +27,10 @@ const videos = ref([
 
   // 3. GOOGLE DRIVE (TETAP EMBED)
   {
-    type: 'drive',
-    id: '1X6jOYJeLK8weWPDFBSZRODS5Ue3bwjgl',
-    title: 'PT. SAMPOERNA Tbk.',
-    category: 'AFTER MOVIE'
+    type: 'youtube',
+    id: 'fumJ_jLM7KM',
+    title: 'Short Movie',
+    category: 'UPEKSHA'
   },
 
   {
@@ -42,10 +42,10 @@ const videos = ref([
 
   // 1. BEHANCE (JADI LINK - BIAR RAPI)
   {
-    type: 'link',                 // <--- Kita set 'link' aja biar gak maksa embed
-    id: 'https://www.behance.net/gallery/194103791/UPEKSHA', // Link Lengkap
-    title: 'UPEKSHA Project',
-    category: 'BEHANCE • UI/UX'
+    type: 'youtube',                 // <--- Kita set 'link' aja biar gak maksa embed
+    id: 'wbE4NyEjDTc', // Link Lengkap
+    title: 'After Movie',
+    category: 'KKN UINSA 72 2025'
   },
 
 ])

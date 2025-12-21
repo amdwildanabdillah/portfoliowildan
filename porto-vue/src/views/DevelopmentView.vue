@@ -32,6 +32,16 @@ const devProjects = ref([
     image: '/dproduction.png',
     link: 'https://dproductionsub.netlify.app/',
     github: 'https://github.com/amdwildanabdillah/dproductionsub'
+  },
+  {
+    id: 4,
+    title: "Wedding Invitation",
+    type: 'Digital Asset',
+    desc: 'Undangan digital berbasis website untuk mempermudah pengantin',
+    stack: ['Vue.js','HTML','Tailwindcss'],
+    image:'/wedinvite.png/',
+    link: 'https://wedding-invitation-wildan.vercel.app/',
+    github: null,
   }
 ])
 </script>

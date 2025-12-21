@@ -35,11 +35,11 @@ const devProjects = ref([
   },
   {
     id: 4,
-    title: "Wedding Invitation",
+    title: "Invitation Kit",
     type: 'Digital Asset',
-    desc: 'Undangan digital berbasis website untuk mempermudah pengantin',
+    desc: 'A highly customizable digital invitation template. Built for speed and aesthetic with smooth animations, RSVP integration, and mobile-first responsive layout.',
     stack: ['Vue.js','HTML','Tailwindcss'],
-    image:'/wedinvite.png/',
+    image: '/wedinvite.png',
     link: 'https://wedding-invitation-wildan.vercel.app/',
     github: null,
   }

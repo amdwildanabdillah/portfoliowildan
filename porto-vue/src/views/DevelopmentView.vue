@@ -42,6 +42,16 @@ const devProjects = ref([
     image: '/wedinvite.png',
     link: 'https://wedding-invitation-wildan.vercel.app/',
     github: null,
+  },
+  {
+    id: 5,
+    title: "WildanInvites HQ (Cashflow App)",
+    type: "Appsheet Development / Internal Tool",
+    desc: "A dedicated internal management tool for WildanInvites, built with AppSheet. It features a robust cashflow tracking system, automated profit/loss reporting (P&L), and expense monitoring—including domain and landing page costs—to ensure healthy business scalability.",
+    stack: ['AppSheet','Google Sheet', 'Automation'],
+    image: '/cashflowhq.png',
+    link: null,
+    github: null,
   }
 ])
 </script>

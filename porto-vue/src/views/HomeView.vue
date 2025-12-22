@@ -107,11 +107,13 @@ onUnmounted(() => {
               <div class="card-header">
                 <div class="hole"></div><span class="role">FULL STACK</span>
               </div>
+              
               <div class="card-body">
                 <img src="../assets/IMG_20251213_175009.jpg" alt="Profile" class="profile-pic" />
-                <h3>Wildan</h3><p>@idan_abdll</p><div class="barcode">*HIRE ME*</div>
-              </div>
-            </div>
+                <h3>Wildan</h3>
+                <p>Wildan Abdillah</p>
+                <a href="https://wa.me/6285232351908?text=Halo%20Wildan,%20saya%20tertarik%20dengan%20jasa%20Anda" target="_blank" class="hire-btn">LET'S TALK</a>
+              </div> </div>
           </div>
         </div>
       </div>
@@ -125,7 +127,7 @@ onUnmounted(() => {
 
       <div class="works-grid">
         <router-link to="/cinematography" class="glass-card work-card clickable-card">
-          <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1506947411487-a56738267384?q=80&w=800');"></div>
+          <div class="card-bg" style="background-image: url('/covercinema.webp');"></div>
           <div class="card-content">
             <span class="tag">Videography</span>
             <h3>Cinematography</h3>
@@ -134,7 +136,7 @@ onUnmounted(() => {
         </router-link>
 
         <router-link to="/development" class="glass-card work-card clickable-card">
-          <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800');"></div>
+          <div class="card-bg" style="background-image: url('/covercode.png');"></div>
           <div class="card-content">
             <span class="tag">Development</span>
             <h3>Web & App</h3>

@@ -274,16 +274,47 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
 
 /* === RESPONSIVE (HP & TABLET) === */
 @media (max-width: 768px) {
-  .masonry-grid { column-count: 2; /* Tablet jadi 2 kolom */ }
+  /* 1. Layout Masonry (Tablet 2 Kolom) */
+  .masonry-grid { column-count: 2; }
+
+  /* 2. Navigasi Lightbox (Pindah ke Bawah biar gampang dipencet jempol) */
   .nav-btn { position: fixed; bottom: 30px; top: auto; transform: none; }
   .prev { left: 30px; } .next { right: 30px; }
+
+  /* 3. 🔥 FIX: TEXT SELALU MUNCUL DI HP (NO HOVER) 🔥 */
+  .overlay {
+    opacity: 1 !important; /* Paksa muncul terus */
+    /* Kasih background gradasi hitam biar tulisan kebaca jelas */
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 15%, rgba(0,0,0,0.4) 60%, transparent 100%);
+    padding-bottom: 15px; 
+  }
+
+  /* Kecilin font judul dikit biar gak menuhi layar HP */
+  .overlay-text h3 {
+    font-size: 1rem;
+    margin-bottom: 2px;
+  }
+
+  /* Caption dikecilin dikit */
+  .caption-text {
+    font-size: 0.75rem !important;
+    margin: 2px 0 !important;
+    display: block; /* Pastikan muncul */
+  }
+
+  /* Info kategori */
+  .meta {
+    font-size: 0.65rem !important;
+    opacity: 0.9;
+  }
 }
 
 @media (max-width: 600px) { 
-  .masonry-grid { column-count: 1; /* HP jadi 1 kolom antri ke bawah */ } 
+  /* HP Kecil jadi 1 kolom antri ke bawah */
+  .masonry-grid { column-count: 1; } 
 }
 
-/* GLOW BACKGROUND */
+/* GLOW BACKGROUND (TETAP DIPAKAI) */
 .ambient-glow { position: fixed; width: 500px; height: 500px; border-radius: 50%; filter: blur(120px); z-index: -1; opacity: 0.4; pointer-events: none; }
 .glow-purple { top: -100px; right: -100px; background: rgba(120, 58, 255, 0.2); }
 .glow-cyan { bottom: -100px; left: -100px; background: rgba(0, 255, 209, 0.2); }

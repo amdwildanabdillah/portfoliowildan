@@ -48,7 +48,7 @@ const devProjects = ref([
     title: "Vixel Creative",
     type: 'Company Profile',
     desc: 'Official landing page for a creative Web Dev and AppSheet Solution. Designed professionally showcase projects,detail service, and enhance brand credibility with an elegant layout and SEO optimization.',
-    stack: ['Vue.js','Vite','Tailwind CSS','Framer Motion'],
+    stack: ['Vue.js','Vite','Tailwind CSS','Framer Motion', 'Javascript'],
     image: '/vixel.png',
     link: 'https://vixelcreative.my.id/',
     github: null,

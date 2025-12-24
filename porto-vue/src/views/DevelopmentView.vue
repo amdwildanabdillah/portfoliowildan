@@ -45,6 +45,16 @@ const devProjects = ref([
   },
   {
     id: 5,
+    title: "VIXEL CREAIVE",
+    type: 'Company Profile',
+    desc: 'Official landing page for a creative Web Dev adn AppSheet Solution. Designed professionally showcase projects,detail service, and enhance brand credibility with an elegant layout and SEO optimization.',
+    stack: ['Vue.js','Vite','Tailwind CSS','Framer Motion'],
+    image: '/vixel.png',
+    link: 'https://vixelcreative.my.id/',
+    github: null,
+  },
+  {
+    id: 6,
     title: "WildanInvites HQ (Cashflow App)",
     type: "Appsheet Development / Internal Tool",
     desc: "A dedicated internal management tool for WildanInvites, built with AppSheet. It features a robust cashflow tracking system, automated profit/loss reporting (P&L), and expense monitoring—including domain and landing page costs—to ensure healthy business scalability.",

@@ -15,13 +15,13 @@ const devProjects = ref([
   },
   {
     id: 2,
-    title: "Wildan's Portfolio",
+    title: "Personal Portfolio",
     type: 'Frontend Development',
     desc: 'An interactive portfolio featuring a modern Glassmorphism design. Built with Vue.js as a Single Page Application (SPA) to deliver a fast, smooth, and fully responsive user experience across all devices.',
     stack: ['Vue.js', 'HTML', 'CSS'],
     image: '/webwildan.png', // Nanti ganti screenshot HP
     link: 'https://portfoliowildan.my.id/', // Link asli (kalau ada)
-    github: 'https://github.com/amdwildanabdillah/amdwildanabdillah.github.io' // AppSheet biasanya gak ada github
+    github: null, // AppSheet biasanya gak ada github
   },
   {
     id: 3,

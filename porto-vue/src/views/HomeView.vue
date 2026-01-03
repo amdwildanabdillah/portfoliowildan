@@ -166,7 +166,9 @@ onUnmounted(() => {
           <a href="https://behance.net/idan_abdll" target="_blank" class="magnetic-btn btn-be"><i class="ph ph-behance-logo"></i> Behance</a>
           <a href="https://github.com/amdwildanabdillah" target="_blank" class="magnetic-btn btn-gh"><i class="ph ph-github-logo"></i> GitHub</a>
           <a href="https://instagram.com/idan_abdll" target="_blank" class="magnetic-btn btn-ig"><i class="ph ph-instagram-logo"></i> Instagram</a>
-          <a href="https://discord.com/users/811059299429384249" target="_blank" class="magnetic-btn btn-discord"><i class="ph ph-discord-logo"></i> Discord</a>
+          <a href="https://www.linkedin.com/in/ahmadwildanabdillah-vixel" target="_blank" class="magnetic-btn btn-li">
+  <i class="ph ph-linkedin-logo"></i> LinkedIn
+</a>
         </div>
       </div>
     </section>

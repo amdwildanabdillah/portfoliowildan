@@ -111,7 +111,7 @@ onUnmounted(() => {
               <div class="card-body">
                 <img src="../assets/IMG_20251213_175009.jpg" alt="Profile" class="profile-pic" />
                 <h3>Wildan</h3>
-                <p>Wildan Abdillah</p>
+                <p>Ahmad Wildan Abdillah</p>
                 <a href="https://wa.me/6285232351908?text=Halo%20Wildan,%20saya%20tertarik%20dengan%20jasa%20Anda" target="_blank" class="hire-btn">LET'S TALK</a>
               </div> </div>
           </div>

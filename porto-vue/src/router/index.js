@@ -1,5 +1,5 @@
-// 1. GANTI import: Pake 'createWebHashHistory' (Pake Hash)
-import { createRouter, createWebHashHistory } from 'vue-router'
+// 1. GANTI import: Pake 'createWebHistory' (Bukan Hash)
+import { createRouter, createWebHistory } from 'vue-router'
 
 import HomeView from '../views/HomeView.vue'
 import CinematographyView from '../views/CinematographyView.vue'
@@ -7,11 +7,10 @@ import PhotographyView from '../views/PhotographyView.vue'
 import DevelopmentView from '../views/DevelopmentView.vue'
 import ResumeView from '../views/ResumeView.vue'
 
-
 const router = createRouter({
-  // 2. GANTI history: Pake createWebHashHistory()
-  // Ini kuncinya biar GitHub Pages gak 404 pas di-refresh
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  // 2. GANTI history: Pake createWebHistory()
+  // Ini bikin URL jadi bersih (portfoliowildan.my.id/resume) tanpa tanda #
+  history: createWebHistory(import.meta.env.BASE_URL),
 
   routes: [
     {
@@ -35,10 +34,10 @@ const router = createRouter({
       component: DevelopmentView
     },
     {
-    path: '/resume',
-    name: 'resume',
-    component: ResumeView
-},
+      path: '/resume',
+      name: 'resume',
+      component: ResumeView
+    },
   ],
 
   // Script Scroll Otomatis (Tetap aman)

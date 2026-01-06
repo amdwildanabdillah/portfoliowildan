@@ -232,7 +232,7 @@ onUnmounted(() => {
 .delay-3 { animation-delay: 1.5s; }
 .delay-4 { animation-delay: 2s; }
 
-/* --- IOS NAVBAR --- */
+/* --- IOS NAVBAR (DESKTOP) --- */
 .ios-nav {
     position: fixed; top: 30px; left: 0; right: 0; margin: 0 auto;
     width: 90%; max-width: 900px; display: flex; justify-content: space-between; align-items: center; padding: 15px 30px;
@@ -307,11 +307,6 @@ onUnmounted(() => {
 .profile-label p { color: var(--text-muted); letter-spacing: 2px; font-size: 0.9rem; text-transform: uppercase; }
 
 /* --- WORKS --- */
-.section-header { text-align: center; margin-bottom: 60px; }
-.section-header h2 { font-size: 3rem; font-family: 'Clash Display'; margin-top: 10px;}
-.center-btn { text-align: center; margin-top: 50px; }
-.secondary-btn { background: transparent; border: 1px solid rgba(255,255,255,0.3); }
-.secondary-btn:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
 .works-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; width: 100%; }
 .work-card { height: 320px; position: relative; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; text-decoration: none; color: inherit; }
 .card-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0.8; transition: 0.5s; mask-image: linear-gradient(to bottom, black, transparent); }
@@ -335,11 +330,29 @@ onUnmounted(() => {
 .footer-col h4 { font-size: 1.1rem; margin-bottom: 25px; color: #fff; }
 .footer-col ul { list-style: none; }
 .footer-col ul li { margin-bottom: 15px; }
-.footer-col ul li a { text-decoration: none; color: #888; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
-.footer-col ul li a:hover { color: #fff; transform: translateX(5px); }
+
+/* STYLE BARU UNTUK TOMBOL SOSMED */
+.footer-socials li a {
+    text-decoration: none; color: #aaa;
+    padding: 10px 20px; /* Padding biar jadi tombol */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Border tipis */
+    background: rgba(255, 255, 255, 0.05); /* Background tipis */
+    border-radius: 30px; /* Bentuk pil */
+    display: flex; align-items: center; gap: 10px;
+    transition: all 0.3s ease;
+}
+.footer-socials li a:hover {
+    color: #fff;
+    border-color: #b084ff; /* Border ungu pas hover */
+    background: rgba(176, 132, 255, 0.1); /* Bg ungu tipis */
+    transform: translateX(5px);
+}
+
 .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; color: #666; display: flex; justify-content: space-between; }
 
-/* --- RESPONSIVE --- */
+/* =========================================
+   🚀 MOBILE RESPONSIVE (FIXED FINAL) 
+   ========================================= */
 @media (max-width: 1280px) {
     .main-container-fluid { padding: 0 20px; }
     .about-content-pro { gap: 50px; }
@@ -361,56 +374,57 @@ onUnmounted(() => {
 }
 
 @media (max-width: 768px) {
-    /* 1. HERO PADDING FIX */
+    /* 1. FIX HERO HP (Biar gak nabrak panah) */
     .hero { 
         min-height: 85vh; 
-        padding: 150px 20px 50px; /* ATAS 150px biar turun ke tengah */
-        display: block; /* Matikan flex center biar padding ngaruh */
+        padding: 0 20px 120px; /* Padding bawah gede buat tempat panah */
+        display: flex; 
+    }
+    .hero-content {
+        margin-bottom: 50px; /* Dorong konten ke atas sedikit */
     }
     .hero-content h1 { font-size: 2.8rem; line-height: 1.2; letter-spacing: 0; }
     .typewriter-text { white-space: normal; border-right: none; animation: none; width: auto; display: block; }
     
-    /* Panah tetap muncul di Mobile (Tengah) */
-    .scroll-indicator { display: block; bottom: 100px; /* Naik dikit biar gak ketutup Nav */ }
+    /* Panah di HP posisinya fix di atas nav */
+    .scroll-indicator { display: block; bottom: 90px; }
 
     .full-screen-section { padding: 40px 0; min-height: auto; display: block; }
     .main-container-fluid { padding: 0 20px; }
     .wide-about-card, .mega-footer { padding: 40px 20px; }
     .profile-frame { width: 100%; max-width: 280px; height: 380px; }
     
-    /* 2. FOOTER FIX */
-    .footer-grid { text-align: left; gap: 30px; }
-    .footer-col ul li a { justify-content: flex-start; }
-    .footer-bottom { text-align: left; padding-bottom: 100px; /* Kasih jarak buat Nav */ }
+    /* 2. FIX FOOTER HP (Rata Tengah & Rapi) */
+    .footer-grid { text-align: center; gap: 40px; }
+    .brand-col p { margin: 0 auto 20px; }
+    .vixel-tag { display: block; margin-top: 10px; } /* Biar turun baris rapi */
+    
+    /* Tombol sosmed di HP rata tengah */
+    .footer-col ul li a { justify-content: center; }
+    .footer-bottom { text-align: center; padding-bottom: 100px; }
+    .footer-cta h2 { font-size: 1.8rem; }
 
-    /* 3. MOBILE NAV (IOS DOCK FLOATING) */
+    /* 3. MOBILE NAV (IOS FLOATING STABLE) */
     .ios-nav { display: none; }
     .mobile-nav {
-        /* Floating Island */
         position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
         width: 90%; max-width: 400px; height: 65px;
-        
-        /* Glass Effect */
         background: rgba(20, 20, 20, 0.7); 
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255,255,255,0.15); 
-        border-radius: 40px; /* Pill Shape */
-        
+        backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255,255,255,0.15); border-radius: 40px;
         display: flex; justify-content: space-around; align-items: center; 
         padding: 0 15px; z-index: 9999;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Shadow halus */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
     
     .nav-icon { font-size: 1.4rem; color: #888; transition: 0.3s; }
     .nav-icon.active-link { color: #b084ff; transform: translateY(-2px); }
     
-    /* 4. HAPUS GLOW UNGU */
+    /* HAPUS GLOW UNGU di HP */
     .center-icon { 
         background: #b084ff; color: white !important; width: 42px; height: 42px;
         border-radius: 50%; display: flex; align-items: center; justify-content: center;
-        margin-top: 0; /* Gak usah nongol */
-        box-shadow: none; /* MATIKAN SHADOW UNGU */
+        margin-top: 0; box-shadow: none;
     }
 }
 </style>

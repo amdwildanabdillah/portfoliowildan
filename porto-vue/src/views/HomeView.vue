@@ -60,10 +60,25 @@ onUnmounted(() => {
   </nav>
 
   <nav class="mobile-nav">
-    <a href="#" @click.prevent="scrollToSection('hero-section')" class="nav-icon" :class="{ 'active-link': activeSection === 'hero-section' }"><i class="ph ph-house"></i></a>
-    <a href="#" @click.prevent="scrollToSection('about-section')" class="nav-icon" :class="{ 'active-link': activeSection === 'about-section' }"><i class="ph ph-user"></i></a>
-    <a href="#" @click.prevent="scrollToSection('work-section')" class="nav-icon center-icon" :class="{ 'active-link': activeSection === 'work-section' }"><i class="ph ph-squares-four"></i></a>
-    <a href="#" @click.prevent="scrollToSection('contact-section')" class="nav-icon" :class="{ 'active-link': activeSection === 'contact-section' }"><i class="ph ph-chat-circle-dots"></i></a>
+    <a href="#" @click.prevent="scrollToSection('hero-section')" class="nav-icon" :class="{ 'active-link': activeSection === 'hero-section' }">
+      <i class="ph ph-house"></i>
+    </a>
+    
+    <a href="#" @click.prevent="scrollToSection('about-section')" class="nav-icon" :class="{ 'active-link': activeSection === 'about-section' }">
+      <i class="ph ph-user"></i>
+    </a>
+
+    <a href="#" @click.prevent="scrollToSection('work-section')" class="nav-icon center-icon" :class="{ 'active-link': activeSection === 'work-section' }">
+      <i class="ph ph-squares-four"></i>
+    </a>
+
+    <router-link to="/resume" class="nav-icon">
+      <i class="ph ph-file-text"></i>
+    </router-link>
+
+    <a href="#" @click.prevent="scrollToSection('contact-section')" class="nav-icon" :class="{ 'active-link': activeSection === 'contact-section' }">
+      <i class="ph ph-chat-circle-dots"></i>
+    </a>
   </nav>
 
   <header id="hero-section" class="hero full-screen-section animate-block">
@@ -91,7 +106,7 @@ onUnmounted(() => {
             <span class="tag">Who Am I?</span>
             <h2>Storyteller <span class="text-gradient">& Developer.</span></h2>
             <p class="bio-text">
-              Hai, saya <b>Wildan</b>. Mahasiswa Komunikasi UINSA yang "tersesat" di jalan yang benar.
+              Hai, saya <b>Wildan</b>. Mahasiswa Komunikasi UINSA yang "tersesat" di jalan yang benar. 
               <br><br>
               Sebagai Founder <b>Vixel Creative</b>, saya menggabungkan ilmu <i>Communication</i> dengan teknis <i>Programming</i>. Saya tidak hanya menulis kode atau merekam gambar, tapi saya <b>membangun narasi</b> digital yang utuh.
             </p>
@@ -187,6 +202,7 @@ onUnmounted(() => {
                     <ul class="footer-socials">
                         <li><a href="https://www.linkedin.com/in/ahmadwildanabdillah-vixel" target="_blank"><i class="ph ph-linkedin-logo"></i> LinkedIn</a></li>
                         <li><a href="https://instagram.com/idan_abdll" target="_blank"><i class="ph ph-instagram-logo"></i> Instagram</a></li>
+                        <li><a href="https://www.youtube.com/@idan_abdll" target="_blank"><i class="ph ph-youtube-logo"></i> YouTube</a></li>
                         <li><a href="https://github.com/amdwildanabdillah" target="_blank"><i class="ph ph-github-logo"></i> GitHub</a></li>
                         <li><a href="https://behance.net/idan_abdll" target="_blank"><i class="ph ph-behance-logo"></i> Behance</a></li>
                     </ul>

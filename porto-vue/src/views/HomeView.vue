@@ -66,7 +66,7 @@ onUnmounted(() => {
     <a href="#" @click.prevent="scrollToSection('contact-section')" class="nav-icon" :class="{ 'active-link': activeSection === 'contact-section' }"><i class="ph ph-chat-circle-dots"></i></a>
   </nav>
 
-  <header id="hero-section" class="hero full-screen-section animate-block">
+  <header id="hero-section" class="hero animate-block">
     <div class="hero-content">
       <span class="badge fade-in-up delay-1">FULL STACK CREATIVE</span>
       <h1>
@@ -77,15 +77,14 @@ onUnmounted(() => {
       </h1>
       <p class="fade-in-up delay-3">Founder Vixel Creative • Videographer • Web Developer</p>
     </div>
-    
     <div class="scroll-indicator fade-in-up delay-4">
         <i class="ph ph-caret-double-down"></i>
     </div>
   </header>
 
-  <main class="main-container-fluid">
+  <main class="main-container">
 
-    <section id="about-section" class="full-screen-section">
+    <section id="about-section" class="section-block">
       <div class="glass-card wide-about-card animate-block">
         <div class="about-content-pro">
           <div class="about-text-pro">
@@ -97,7 +96,7 @@ onUnmounted(() => {
               Sebagai Founder <b>Vixel Creative</b>, saya menggabungkan ilmu <i>Communication</i> dengan teknis <i>Programming</i>. Saya tidak hanya menulis kode atau merekam gambar, tapi saya <b>membangun narasi</b> digital yang utuh.
             </p>
             <div class="stats-pro">
-              <div class="stat-box"><h3>3+</h3><p>Years Exp.</p></div>
+              <div class="stat-box"><h3>3+</h3><p>Years</p></div>
               <div class="stat-box"><h3>15+</h3><p>Projects</p></div>
               <div class="stat-box"><h3>Vue.js</h3><p>Specialist</p></div>
             </div>
@@ -106,13 +105,11 @@ onUnmounted(() => {
                 <i class="ph ph-atom" title="React/Modern Web"></i>
                 <i class="ph ph-camera-rotate" title="Sony Alpha"></i>
                 <i class="ph ph-drone" title="DJI Drone"></i>
-                <i class="ph ph-film-slate" title="Davinci/Premiere"></i>
              </div>
              <a href="https://wa.me/6285232351908?text=Halo%20Wildan" target="_blank" class="hire-btn primary-btn">
                 Let's Collaborate <i class="ph ph-arrow-up-right"></i>
              </a>
           </div>
-
           <div class="profile-showcase">
             <div class="profile-frame">
                 <img src="../assets/IMG_20251213_175009.jpg" alt="Profile Wildan" class="profile-img-pro" />
@@ -128,13 +125,12 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <section id="work-section" class="full-screen-section work-section-padded">
-      <div class="section-header animate-block">
-        <span class="tag">Portfolio</span>
+    <section id="work-section" class="section-block">
+      <div class="section-title animate-block">
         <h2>Selected <span class="text-gradient">Works</span></h2>
+        <p>Highlights of my best work.</p>
       </div>
-
-      <div class="works-grid animate-block delay-2">
+      <div class="works-grid animate-block">
         <router-link to="/cinematography" class="glass-card work-card clickable-card">
           <div class="card-bg" style="background-image: url('/covercinema.webp');"></div>
           <div class="card-content"><span class="tag">Videography</span><h3>Cinematography</h3><p>Visual storytelling & motion</p></div>
@@ -148,48 +144,51 @@ onUnmounted(() => {
           <div class="card-content"><span class="tag">Photography</span><h3>Gallery</h3><p>Timeless moments in frames.</p></div>
         </router-link>
       </div>
-       <div class="center-btn animate-block delay-3">
-          <router-link to="/resume" class="hire-btn secondary-btn">See All Projects & Resume</router-link>
-       </div>
     </section>
 
-    <section id="contact-section" class="full-screen-section footer-section">
-        <div class="mega-footer glass-card animate-block">
-            <div class="footer-cta">
-                <h2>Ready to make something <span class="text-gradient">amazing?</span></h2>
-                <p>Mari diskusikan ide dan projekmu bersama Vixel Creative.</p>
-                <a href="https://wa.me/6285232351908" target="_blank" class="hire-btn giant-btn">
-                    Start a Project <i class="ph ph-whatsapp-logo"></i>
-                </a>
-            </div>
-            <div class="footer-divider"></div>
-            <div class="footer-grid">
-                <div class="footer-col brand-col">
-                    <h3>WILDAN.</h3>
-                    <p>Bridging the gap between human connection and digital experience through visuals and code.</p>
-                    <span class="vixel-tag">A Vixel Creative Initiative.</span>
-                </div>
-                 <div class="footer-col">
-                    <h4>Connect</h4>
-                    <ul class="footer-socials">
-                        <li><a href="https://www.linkedin.com/in/ahmadwildanabdillah-vixel" target="_blank" class="social-btn btn-li"><i class="ph ph-linkedin-logo"></i> <span>LinkedIn</span></a></li>
-                        <li><a href="https://instagram.com/idan_abdll" target="_blank" class="social-btn btn-ig"><i class="ph ph-instagram-logo"></i> <span>Instagram</span></a></li>
-                        <li><a href="https://www.youtube.com/@idan_abdll" target="_blank" class="social-btn btn-yt"><i class="ph ph-youtube-logo"></i> <span>YouTube</span></a></li>
-                        <li><a href="https://github.com/amdwildanabdillah" target="_blank" class="social-btn btn-gh"><i class="ph ph-github-logo"></i> <span>GitHub</span></a></li>
-                        <li><a href="https://behance.net/idan_abdll" target="_blank" class="social-btn btn-be"><i class="ph ph-behance-logo"></i> <span>Behance</span></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Ahmad Wildan Abdillah. All rights reserved.</p>
-                <p>Made with code and creativity.</p>
-            </div>
+    <section id="contact-section" class="section-block">
+      <div class="glass-card mega-footer animate-block">
+        
+        <div class="footer-cta">
+          <h2>Ready to make something <span class="text-gradient">amazing?</span></h2>
+          <p>Mari diskusikan ide dan projekmu bersama Vixel Creative.</p>
+          <a href="https://wa.me/6285232351908" target="_blank" class="hire-btn giant-btn">
+            Start a Project <i class="ph ph-whatsapp-logo"></i>
+          </a>
         </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-grid">
+          <div class="footer-col brand-col">
+            <h3>WILDAN.</h3>
+            <p>Bridging the gap between human connection and digital experience through visuals and code.</p>
+            <span class="vixel-tag">A Vixel Creative Initiative.</span>
+          </div>
+
+          <div class="footer-col connect-col">
+            <h4>Connect</h4>
+            <div class="social-buttons-container">
+               <a href="https://www.linkedin.com/in/ahmadwildanabdillah-vixel" target="_blank" class="social-btn btn-li"><i class="ph ph-linkedin-logo"></i> <span>LinkedIn</span></a>
+               <a href="https://instagram.com/idan_abdll" target="_blank" class="social-btn btn-ig"><i class="ph ph-instagram-logo"></i> <span>Instagram</span></a>
+               <a href="https://www.youtube.com/@idan_abdll" target="_blank" class="social-btn btn-yt"><i class="ph ph-youtube-logo"></i> <span>YouTube</span></a>
+               <a href="https://github.com/amdwildanabdillah" target="_blank" class="social-btn btn-gh"><i class="ph ph-github-logo"></i> <span>GitHub</span></a>
+               <a href="https://behance.net/idan_abdll" target="_blank" class="social-btn btn-be"><i class="ph ph-behance-logo"></i> <span>Behance</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 Ahmad Wildan Abdillah. All rights reserved.</p>
+          <p>Made with code and creativity.</p>
+        </div>
+
+      </div>
     </section>
 
   </main>
 </template>
 
 <style scoped>
-/* SEMUA CSS PINDAH KE GLOBAL.CSS */
+/* STYLE KOSONGKAN - PAKAI GLOBAL.CSS */
 </style>

@@ -1,15 +1,17 @@
-// 1. GANTI import: Pake 'createWebHistory' (Bukan Hash)
 import { createRouter, createWebHistory } from 'vue-router'
 
+// Import Halaman-halaman
 import HomeView from '../views/HomeView.vue'
 import CinematographyView from '../views/CinematographyView.vue'
 import PhotographyView from '../views/PhotographyView.vue'
 import DevelopmentView from '../views/DevelopmentView.vue'
 import ResumeView from '../views/ResumeView.vue'
 
+// 1. IMPORT HALAMAN ADMIN (INI TAMBAHANNYA)
+import AdminView from '../views/AdminView.vue'
+
 const router = createRouter({
-  // 2. GANTI history: Pake createWebHistory()
-  // Ini bikin URL jadi bersih (portfoliowildan.my.id/resume) tanpa tanda #
+  // Pake WebHistory biar URL bersih (tanpa tanda #)
   history: createWebHistory(import.meta.env.BASE_URL),
 
   routes: [
@@ -38,9 +40,16 @@ const router = createRouter({
       name: 'resume',
       component: ResumeView
     },
+
+    // 2. DAFTARKAN JALUR KHUSUS ADMIN DI SINI
+    {
+      path: '/admin',
+      name: 'admin',
+      component: AdminView
+    }
   ],
 
-  // Script Scroll Otomatis (Tetap aman)
+  // Biar kalau pindah halaman, scroll balik ke paling atas
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
       return { el: to.hash, behavior: 'smooth' }

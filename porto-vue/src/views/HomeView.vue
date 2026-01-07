@@ -91,7 +91,7 @@ onUnmounted(() => {
             <span class="tag">Who Am I?</span>
             <h2>Storyteller <span class="text-gradient">& Developer.</span></h2>
             <p class="bio-text">
-              Hai, saya <b>Wildan</b>. Mahasiswa Komunikasi UINSA yang "tersesat" di jalan yang benar. 
+              Hai, saya <b>Ahmad Wildan Abdillah</b>. Mahasiswa Komunikasi Penyiaran Islam UINSA yang memiliki passion di bidang creative technology, khususnya videografi dan pengembangan web. Saya percaya bahwa <b>cerita yang baik</b> dapat menghubungkan manusia dan menciptakan pengalaman digital yang bermakna.
               <br><br>
               Sebagai Founder <b>Vixel Creative</b>, saya menggabungkan ilmu <i>Communication</i> dengan teknis <i>Programming</i>. Saya tidak hanya menulis kode atau merekam gambar, tapi saya <b>membangun narasi</b> digital yang utuh.
             </p>
@@ -106,10 +106,12 @@ onUnmounted(() => {
                 <i class="ph ph-camera-rotate" title="Sony Alpha"></i>
                 <i class="ph ph-drone" title="DJI Drone"></i>
              </div>
-             <a href="https://wa.me/6285232351908?text=Halo%20Wildan" target="_blank" class="hire-btn primary-btn">
+
+             <a href="https://wa.me/6285232351908?text=Halo%20Wildan" target="_blank" class="action-btn">
                 Let's Collaborate <i class="ph ph-arrow-up-right"></i>
              </a>
           </div>
+
           <div class="profile-showcase">
             <div class="profile-frame">
                 <img src="../assets/IMG_20251213_175009.jpg" alt="Profile Wildan" class="profile-img-pro" />
@@ -117,8 +119,8 @@ onUnmounted(() => {
                 <div class="frame-border color-2"></div>
             </div>
             <div class="profile-label">
-                <h3>Ahmad Wildan</h3>
-                <p>Full Stack Creative Lead</p>
+                <h3>Ahmad Wildan Abdillah</h3>
+                <p>Full Stack Creative</p>
             </div>
           </div>
         </div>
@@ -130,6 +132,7 @@ onUnmounted(() => {
         <h2>Selected <span class="text-gradient">Works</span></h2>
         <p>Highlights of my best work.</p>
       </div>
+
       <div class="works-grid animate-block">
         <router-link to="/cinematography" class="glass-card work-card clickable-card">
           <div class="card-bg" style="background-image: url('/covercinema.webp');"></div>
@@ -148,7 +151,7 @@ onUnmounted(() => {
 
     <section id="contact-section" class="section-block">
       <div class="glass-card mega-footer animate-block">
-        
+
         <div class="footer-cta">
           <h2>Ready to make something <span class="text-gradient">amazing?</span></h2>
           <p>Mari diskusikan ide dan projekmu bersama Vixel Creative.</p>
@@ -166,14 +169,14 @@ onUnmounted(() => {
             <span class="vixel-tag">A Vixel Creative Initiative.</span>
           </div>
 
-          <div class="footer-col connect-col">
+          <div class="footer-col">
             <h4>Connect</h4>
-            <div class="social-buttons-container">
-               <a href="https://www.linkedin.com/in/ahmadwildanabdillah-vixel" target="_blank" class="social-btn btn-li"><i class="ph ph-linkedin-logo"></i> <span>LinkedIn</span></a>
-               <a href="https://instagram.com/idan_abdll" target="_blank" class="social-btn btn-ig"><i class="ph ph-instagram-logo"></i> <span>Instagram</span></a>
-               <a href="https://www.youtube.com/@idan_abdll" target="_blank" class="social-btn btn-yt"><i class="ph ph-youtube-logo"></i> <span>YouTube</span></a>
-               <a href="https://github.com/amdwildanabdillah" target="_blank" class="social-btn btn-gh"><i class="ph ph-github-logo"></i> <span>GitHub</span></a>
-               <a href="https://behance.net/idan_abdll" target="_blank" class="social-btn btn-be"><i class="ph ph-behance-logo"></i> <span>Behance</span></a>
+            <div class="social-links-grid">
+              <a href="https://behance.net/idan_abdll" target="_blank" class="social-btn btn-be"><i class="ph ph-behance-logo"></i> <span>Behance</span></a>
+              <a href="https://github.com/amdwildanabdillah" target="_blank" class="social-btn btn-gh"><i class="ph ph-github-logo"></i> <span>GitHub</span></a>
+              <a href="https://instagram.com/idan_abdll" target="_blank" class="social-btn btn-ig"><i class="ph ph-instagram-logo"></i> <span>Instagram</span></a>
+              <a href="https://www.linkedin.com/in/ahmadwildanabdillah-vixel" target="_blank" class="social-btn btn-li"><i class="ph ph-linkedin-logo"></i> <span>LinkedIn</span></a>
+              <a href="https://www.youtube.com/@idan_abdll" target="_blank" class="social-btn btn-yt"><i class="ph ph-youtube-logo"></i> <span>YouTube</span></a>
             </div>
           </div>
         </div>
@@ -190,5 +193,5 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* STYLE KOSONGKAN - PAKAI GLOBAL.CSS */
+/* STYLE DI GLOBAL.CSS */
 </style>

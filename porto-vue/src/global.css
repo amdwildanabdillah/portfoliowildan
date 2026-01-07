@@ -1,176 +1,273 @@
-<script setup>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+/* =========================================
+   1. VARIABLES & RESET
+   ========================================= */
+:root {
+    --bg-color: #050505;
+    --text-main: #ffffff;
+    --text-muted: #aaaaaa;
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-bg: rgba(20, 20, 20, 0.4);
+    --primary-color: #b084ff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background-color: var(--bg-color); color: var(--text-main); font-family: 'General Sans', sans-serif; overflow-x: hidden; min-height: 100vh; }
 
-const scrollToSection = (id) => {
-  const element = document.getElementById(id)
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' })
-  }
+/* =========================================
+   2. UTILS
+   ========================================= */
+.ambient-glow { position: fixed; width: 600px; height: 600px; border-radius: 50%; filter: blur(120px); z-index: -1; opacity: 0.6; pointer-events: none; animation: float 10s infinite ease-in-out alternate; }
+.glow-purple { top: -150px; left: -100px; background: rgba(120, 58, 255, 0.4); }
+.glow-cyan { bottom: -150px; right: -100px; background: rgba(0, 255, 209, 0.3); animation-delay: 2s; }
+@keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, 50px) scale(1.1); } }
+
+.text-gradient { background: linear-gradient(to right, #ffffff, var(--primary-color)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; display: inline-block; }
+
+/* NOTE: .tag layout logic dipindah ke section Works biar aman */
+.tag { background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 30px; font-size: 0.75rem; text-transform: uppercase; display: inline-block; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1); letter-spacing: 1px; }
+
+/* Animations */
+.animate-block { opacity: 0; transform: translateY(50px) scale(0.95); transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.animate-block.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+.fade-in-up { opacity: 0; animation: fadeInUp 1s forwards; }
+.fade-in-down { opacity: 0; animation: fadeInDown 1s forwards; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+.delay-1 { animation-delay: 0.2s; } .delay-2 { animation-delay: 0.4s; } .delay-3 { animation-delay: 0.6s; } .delay-4 { animation-delay: 0.8s; }
+
+/* =========================================
+   3. COMPONENTS
+   ========================================= */
+.glass-card { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 24px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease, border-color 0.3s ease; overflow: hidden; }
+.glass-card:hover { transform: translateY(-5px); border-color: rgba(255, 255, 255, 0.3); }
+
+/* IOS NAV (DESKTOP) */
+.ios-nav {
+    position: fixed; top: 30px; left: 0; right: 0; margin: 0 auto;
+    width: 90%; max-width: 900px; display: flex; justify-content: space-between; align-items: center; padding: 15px 30px;
+    background: rgba(252, 252, 252, 0.11); backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.425); border-radius: 50px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3); z-index: 1000;
+}
+.ios-nav .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: 1px; color: #fff; }
+.desktop-menu { display: flex; gap: 30px; list-style: none; }
+.desktop-menu a { text-decoration: none; color: #aaa; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
+.desktop-menu a:hover { color: #fff; }
+.btn-hire-small { background: #fff; color: #000; padding: 8px 20px; border-radius: 30px; font-weight: 700; font-size: 0.85rem; text-decoration: none; transition: 0.3s; }
+.btn-hire-small:hover { background: var(--primary-color); color: #fff; }
+.glass-nav { display: none !important; }
+
+/* =========================================
+   4. SECTIONS
+   ========================================= */
+/* HERO */
+.hero { min-height: 100vh; display: flex; justify-content: center; align-items: center; text-align: center; position: relative; padding: 0 5%; }
+.hero-content h1 { font-size: 5rem; line-height: 1.1; margin: 25px 0; font-family: 'Clash Display', sans-serif; letter-spacing: -2px; }
+.typewriter-container { display: inline-block; vertical-align: bottom; }
+.typewriter-text {
+    display: inline-block; overflow: hidden; border-right: 4px solid var(--primary-color);
+    white-space: nowrap; width: 0; color: transparent;
+    background: linear-gradient(to right, #ffffff, var(--primary-color)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    animation: typing-loop 6s steps(30, end) infinite, blink-caret 0.75s step-end infinite;
+}
+@keyframes typing-loop { 0% { width: 0; } 30% { width: 100%; } 70% { width: 100%; } 80% { width: 0; } 100% { width: 0; } }
+@keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: var(--primary-color); } }
+.scroll-indicator { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); font-size: 2rem; color: #666; animation: bounce 2s infinite; opacity: 0.7; }
+@keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translate(-50%, 0);} 40% {transform: translate(-50%, -10px);} 60% {transform: translate(-50%, -5px);} }
+
+/* MAIN LAYOUT */
+.main-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; display: flex; flex-direction: column; gap: 150px; padding-bottom: 100px; }
+.section-block { scroll-margin-top: 100px; width: 100%; }
+.section-title { text-align: center !important; margin-bottom: 60px; width: 100%; }
+.section-title h2 { font-size: 3rem; font-family: 'Clash Display'; }
+
+/* ABOUT SECTION */
+.wide-about-card { padding: 60px; width: 100%; }
+.about-content-pro { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
+.about-text-pro h2 { font-size: 3rem; margin: 15px 0; line-height: 1.1; font-family: 'Clash Display', sans-serif; }
+.bio-text { font-size: 1.1rem; color: #ccc; line-height: 1.7; margin-bottom: 30px; max-width: 90%; }
+.stats-pro { display: flex; gap: 40px; margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.stats-pro .stat-box h3 { font-size: 2.5rem; margin-bottom: 0; background: linear-gradient(to right, #fff, var(--primary-color)); -webkit-background-clip: text; color: transparent; }
+.arsenal-pro { display: flex; gap: 25px; font-size: 2rem; color: #888; margin-bottom: 40px; }
+.arsenal-pro i:hover { color: var(--primary-color); transform: translateY(-5px) scale(1.1); }
+
+/* TOMBOL LET'S COLLABORATE FIXED */
+.action-btn {
+    background-color: #fff !important; color: #000 !important; border: none !important;
+    padding: 15px 40px; border-radius: 50px !important; font-size: 1rem;
+    display: inline-flex; align-items: center; gap: 10px; font-weight: 800;
+    text-decoration: none; cursor: pointer; transition: 0.3s; margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+}
+.action-btn:hover {
+    background-color: var(--primary-color) !important; color: #fff !important;
+    transform: translateY(-3px); box-shadow: 0 10px 30px rgba(176, 132, 255, 0.5);
 }
 
-const activeSection = ref('hero-section')
-let navObserver = null
-let scrollAnimationObserver = null
+/* PROFILE FRAME */
+.profile-showcase { display: flex; flex-direction: column; align-items: center; position: relative; }
+.profile-frame { position: relative; width: 300px; height: 400px; border-radius: 20px; z-index: 2; }
+.profile-img-pro { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); position: relative; z-index: 3; }
+.frame-border { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 20px; z-index: 1; opacity: 0.5; transition: 0.5s ease; }
+.color-1 { border: 2px solid var(--primary-color); transform: translate(15px, 15px); }
+.color-2 { border: 2px solid #00d2ff; transform: translate(-15px, -15px); }
+.wide-about-card:hover .color-1 { transform: translate(25px, 25px); opacity: 0.8; }
+.wide-about-card:hover .color-2 { transform: translate(-25px, -25px); opacity: 0.8; }
+.profile-label { margin-top: 25px; text-align: center; }
+.profile-label h3 { font-size: 1.5rem; margin-bottom: 5px; font-family: 'Clash Display'; }
+.profile-label p { color: var(--text-muted); letter-spacing: 2px; font-size: 0.9rem; text-transform: uppercase; }
 
-onMounted(() => {
-  const sections = document.querySelectorAll('section[id], header[id]')
-  const navOptions = { root: null, rootMargin: '-50% 0px -50% 0px', threshold: 0 }
-  navObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) activeSection.value = entry.target.id
-    })
-  }, navOptions)
-  sections.forEach((section) => navObserver.observe(section))
+/* =========================================
+   🔥 FIX WORKS SECTION (FINAL) 🔥
+   ========================================= */
+.works-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
 
-  nextTick(() => {
-      const animatedElements = document.querySelectorAll('.animate-block');
-      const animationOptions = { root: null, rootMargin: '0px 0px -100px 0px', threshold: 0.1 };
-      scrollAnimationObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                  entry.target.classList.add('is-visible');
-                  observer.unobserve(entry.target);
-              }
-          });
-      }, animationOptions);
-      animatedElements.forEach(el => scrollAnimationObserver.observe(el));
-  });
-})
+.work-card {
+    height: 480px;
+    position: relative;
+    display: flex;
+    /* Padding dihilangkan di parent, dipindah ke .card-content */
+    padding: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+}
 
-onUnmounted(() => {
-  if (navObserver) navObserver.disconnect()
-  if (scrollAnimationObserver) scrollAnimationObserver.disconnect()
-})
-</script>
+.card-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0.8; transition: 0.5s; mask-image: linear-gradient(to bottom, black, transparent); }
+.work-card:hover .card-bg { transform: scale(1.05); opacity: 1; }
 
-<template>
-  <div class="ambient-glow glow-purple"></div>
-  <div class="ambient-glow glow-cyan"></div>
+/* 🔥 PERBAIKAN UTAMA DI SINI 🔥 */
+.card-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    /* 1. WAJIB FULL HEIGHT */
+    height: 100%;
+    /* 2. Pindah padding kesini */
+    padding: 40px;
 
-  <nav class="ios-nav fade-in-down">
-    <div class="logo">WILDAN.</div>
-    <ul class="desktop-menu">
-      <li><a href="#" @click.prevent="scrollToSection('hero-section')">Home</a></li>
-      <li><a href="#" @click.prevent="scrollToSection('about-section')">About</a></li>
-      <li><a href="#" @click.prevent="scrollToSection('work-section')">Work</a></li>
-      <li><router-link to="/resume">Resume</router-link></li>
-    </ul>
-    <a href="#" @click.prevent="scrollToSection('contact-section')" class="btn-hire-small">Connect</a>
-  </nav>
+    /* 3. Aktifkan Layout Flex Column */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Rata tengah horizontal */
+}
 
-  <nav class="mobile-nav fade-in-up">
-    <a href="#" @click.prevent="scrollToSection('hero-section')" class="nav-icon" :class="{ 'active-link': activeSection === 'hero-section' }"><i class="ph ph-house"></i></a>
-    <a href="#" @click.prevent="scrollToSection('about-section')" class="nav-icon" :class="{ 'active-link': activeSection === 'about-section' }"><i class="ph ph-user"></i></a>
-    <a href="#" @click.prevent="scrollToSection('work-section')" class="nav-icon center-icon" :class="{ 'active-link': activeSection === 'work-section' }"><i class="ph ph-squares-four"></i></a>
-    <router-link to="/resume" class="nav-icon"><i class="ph ph-file-text"></i></router-link>
-    <a href="#" @click.prevent="scrollToSection('contact-section')" class="nav-icon" :class="{ 'active-link': activeSection === 'contact-section' }"><i class="ph ph-chat-circle-dots"></i></a>
-  </nav>
+/* LOGIKA PEMISAH (TAG DI ATAS, SISANYA DI BAWAH) */
 
-  <header id="hero-section" class="hero animate-block">
-    <div class="hero-content">
-      <span class="badge fade-in-up delay-1">FULL STACK CREATIVE</span>
-      <h1>
-        <span class="static-text fade-in-up delay-2">Visuals by Heart.</span><br />
-        <span class="typewriter-container">
-            <span class="text-gradient typewriter-text">Logic by Code.</span>
-        </span>
-      </h1>
-      <p class="fade-in-up delay-3">Founder Vixel Creative • Videographer • Web Developer</p>
-    </div>
-    
-    <div class="scroll-indicator fade-in-up delay-4">
-        <i class="ph ph-caret-double-down"></i>
-    </div>
-  </header>
+/* Tag akan maksa margin bawahnya ngabisin tempat kosong */
+/* Jadi elemen di bawahnya kedorong mentok ke dasar */
+.card-content .tag {
+    margin-bottom: auto !important;
+}
 
-  <main class="main-container">
+/* Judul dan Deskripsi otomatis ada di bawah karena didorong Tag */
+.work-card h3 {
+    font-size: 2rem;
+    font-family: 'Clash Display', sans-serif;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.work-card p {
+    color: #ccc;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
 
-    <section id="about-section" class="section-block">
-      <div class="glass-card wide-about-card animate-block">
-        <div class="about-content-pro">
-          <div class="about-text-pro">
-            <span class="tag">Who Am I?</span>
-            <h2>Storyteller <span class="text-gradient">& Developer.</span></h2>
-            <p class="bio-text">
-              Hai, saya <b>Wildan</b>. Mahasiswa Komunikasi UINSA yang "tersesat" di jalan yang benar. 
-              <br><br>
-              Sebagai Founder <b>Vixel Creative</b>, saya menggabungkan ilmu <i>Communication</i> dengan teknis <i>Programming</i>. Saya tidak hanya menulis kode atau merekam gambar, tapi saya <b>membangun narasi</b> digital yang utuh.
-            </p>
-            <div class="stats-pro">
-              <div class="stat-box"><h3>3+</h3><p>Years</p></div>
-              <div class="stat-box"><h3>15+</h3><p>Projects</p></div>
-              <div class="stat-box"><h3>Vue.js</h3><p>Specialist</p></div>
-            </div>
-             <div class="arsenal-pro">
-                <i class="ph ph-file-vue" title="Vue.js"></i>
-                <i class="ph ph-atom" title="React/Modern Web"></i>
-                <i class="ph ph-camera-rotate" title="Sony Alpha"></i>
-                <i class="ph ph-drone" title="DJI Drone"></i>
-             </div>
-             
-             <a href="https://wa.me/6285232351908?text=Halo%20Wildan" target="_blank" class="hire-btn primary-btn">
-                Let's Collaborate <i class="ph ph-arrow-up-right"></i>
-             </a>
-          </div>
+/* MEGA FOOTER */
+.footer-section { justify-content: flex-end; padding-bottom: 0; }
+.mega-footer { padding: 80px 60px 30px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; background: rgba(10, 10, 10, 0.8); }
+.footer-cta { text-align: center; margin-bottom: 60px; }
+.footer-cta h2 { font-size: 2.5rem; font-family: 'Clash Display'; margin-bottom: 15px; }
+.footer-cta p { color: #aaa; font-size: 1.1rem; margin-bottom: 30px; }
+.giant-btn { padding: 15px 40px; font-size: 1.2rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 15px; background: var(--primary-color); border: none; text-decoration: none; color: white; transition: 0.3s; }
+.giant-btn:hover { background: #fff; color: var(--primary-color) !important; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(176, 132, 255, 0.4); }
+.footer-divider { height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 50px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 50px; margin-bottom: 60px; }
+.brand-col h3 { font-size: 1.5rem; margin-bottom: 20px; letter-spacing: 1px; }
+.brand-col p { color: #aaa; line-height: 1.6; margin-bottom: 20px; max-width: 80%; }
+.vixel-tag { font-size: 0.8rem; color: var(--primary-color); font-weight: 600; letter-spacing: 1px; }
+.footer-col h4 { font-size: 1.1rem; margin-bottom: 25px; color: #fff; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 15px; }
 
-          <div class="profile-showcase">
-            <div class="profile-frame">
-                <img src="../assets/IMG_20251213_175009.jpg" alt="Profile Wildan" class="profile-img-pro" />
-                <div class="frame-border color-1"></div>
-                <div class="frame-border color-2"></div>
-            </div>
-            <div class="profile-label">
-                <h3>Ahmad Wildan</h3>
-                <p>Full Stack Creative Lead</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+/* SOCIAL BUTTONS (KOTAK) */
+.social-links-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 40px; }
+.social-btn {
+    text-decoration: none; color: #aaa; padding: 12px 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.05);
+    border-radius: 30px; display: flex; align-items: center; gap: 10px;
+    transition: all 0.3s ease; font-size: 0.9rem;
+}
+.social-btn:hover { color: #fff; transform: translateY(-3px); border-color: var(--primary-color); background: rgba(176, 132, 255, 0.1); }
 
-    <section id="work-section" class="section-block">
-      <div class="section-title animate-block">
-        <h2>Selected <span class="text-gradient">Works</span></h2>
-        <p>Highlights of my best work.</p>
-      </div>
+.footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; color: #666; display: flex; justify-content: space-between; }
 
-      <div class="works-grid animate-block">
-        <router-link to="/cinematography" class="glass-card work-card clickable-card">
-          <div class="card-bg" style="background-image: url('/covercinema.webp');"></div>
-          <div class="card-content"><span class="tag">Videography</span><h3>Cinematography</h3><p>Visual storytelling & motion</p></div>
-        </router-link>
-        <router-link to="/development" class="glass-card work-card clickable-card">
-          <div class="card-bg" style="background-image: url('/covercode.png');"></div>
-          <div class="card-content"><span class="tag">Development</span><h3>Web & App</h3><p>Code, logic, and creativity.</p></div>
-        </router-link>
-        <router-link to="/photography" class="glass-card work-card clickable-card">
-          <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800');"></div>
-          <div class="card-content"><span class="tag">Photography</span><h3>Gallery</h3><p>Timeless moments in frames.</p></div>
-        </router-link>
-      </div>
-    </section>
+/* =========================================
+   5. MOBILE RESPONSIVE (THE FIXES)
+   ========================================= */
+.mobile-nav { display: none; }
 
-    <section id="contact-section" class="section-block">
-      <div class="glass-card social-card-full animate-block">
-        <div class="social-text">
-          <h2>Let's <span class="text-gradient">Connect</span></h2>
-          <p>Work and Repository</p>
-        </div>
-        <div class="social-links-grid">
-          <a href="https://behance.net/idan_abdll" target="_blank" class="social-btn btn-be"><i class="ph ph-behance-logo"></i> <span>Behance</span></a>
-          <a href="https://github.com/amdwildanabdillah" target="_blank" class="social-btn btn-gh"><i class="ph ph-github-logo"></i> <span>GitHub</span></a>
-          <a href="https://instagram.com/idan_abdll" target="_blank" class="social-btn btn-ig"><i class="ph ph-instagram-logo"></i> <span>Instagram</span></a>
-          <a href="https://www.linkedin.com/in/ahmadwildanabdillah-vixel" target="_blank" class="social-btn btn-li"><i class="ph ph-linkedin-logo"></i> <span>LinkedIn</span></a>
-          <a href="https://www.youtube.com/@idan_abdll" target="_blank" class="social-btn btn-yt"><i class="ph ph-youtube-logo"></i> <span>YouTube</span></a>
-        </div>
-      </div>
-    </section>
+@media (max-width: 1024px) {
+    .about-content-pro { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+    .about-text-pro { text-align: center; }
+    .stats-pro, .arsenal-pro { justify-content: center; }
+    .profile-showcase { order: -1; margin-bottom: 30px; }
+    .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+    .brand-col p { margin: 0 auto 20px; }
+    .footer-col ul li a { justify-content: center; }
+    .footer-bottom { flex-direction: column; gap: 10px; }
+}
 
-  </main>
+@media (max-width: 768px) {
+    /* 1. HERO FIX */
+    .hero { min-height: 85vh; padding-top: 150px; display: block; }
+    .hero-content h1 { font-size: 2.8rem; line-height: 1.2; margin-bottom: 20px; }
+    .typewriter-text { white-space: nowrap; font-size: 2.4rem; width: 0; border-right: 3px solid var(--primary-color); }
+    .scroll-indicator { bottom: 120px; }
 
-  <footer><p>&copy; 2026 Ahmad Wildan Abdillah | Founder Vixel Creative.</p></footer>
-</template>
+    /* 2. LAYOUT FIX */
+    .main-container { padding: 0 25px; gap: 120px; }
+    .wide-about-card, .mega-footer { padding: 50px 25px; }
+    .profile-frame { width: 100%; max-width: 300px; height: 400px; }
 
-<style scoped>
-/* KOSONG */
-</style>
+    /* 3. FIX SOSMED JARAK JAUH */
+    .social-links-grid { flex-direction: column; width: 100%; gap: 30px; }
+    .social-btn { justify-content: center; width: 100%; }
+
+    /* 4. IOS NAV HIDE */
+    .ios-nav { display: none; }
+
+    /* 5. FIX NAVBAR: LEBIH BENING */
+    .mobile-nav {
+        display: flex !important; justify-content: space-around; align-items: center;
+        position: fixed; bottom: 30px; left: 0; right: 0; margin: 0 auto;
+        width: 90%; max-width: 380px; height: 65px;
+        background: rgba(20, 20, 20, 0.6);
+        backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+        border: 1px solid rgba(255,255,255,0.15); border-radius: 50px;
+        z-index: 9999; box-shadow: 0 10px 40px rgba(0,0,0,0.5); padding: 0 15px;
+    }
+    .nav-icon { font-size: 1.5rem; color: #888; transition: 0.3s; }
+    .nav-icon.active-link { color: var(--primary-color); transform: translateY(-3px); }
+
+    .center-icon {
+        background: transparent !important; color: #888 !important;
+        width: auto; height: auto; border-radius: 0; box-shadow: none; margin-top: 0;
+    }
+    .center-icon.active-link { color: var(--primary-color) !important; }
+
+    footer { padding-bottom: 130px; }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        justify-content: center;
+        padding-bottom: 130px;
+    }
+}

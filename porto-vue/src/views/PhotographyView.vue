@@ -55,6 +55,17 @@ const projects = ref([
       '/livin7.jpg'
     ]
   },
+  {
+    id: 5,
+    title: 'Sky View',
+    category: 'Aerial',
+    thumbnail: '/urban-cov.jpg',
+    gallery: [
+      '/urban1.jpg',
+      '/urban2.jpg',
+      '/urban3.jpg'
+    ]
+  },
 ])
 
 // --- LOGIKA LIGHTBOX (POP-UP) ---

@@ -164,7 +164,7 @@ onUnmounted(() => {
 
         <div class="footer-grid">
           <div class="footer-col brand-col">
-            <h3>WILDAN.</h3>
+            <h3>AHMAD WILDAN ABDILLAH</h3>
             <p>Bridging the gap between human connection and digital experience through visuals and code.</p>
             <span class="vixel-tag">A Vixel Creative Initiative.</span>
           </div>

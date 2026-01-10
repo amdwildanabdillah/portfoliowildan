@@ -1,37 +1,104 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-// --- HELPER ICONS ---
+// --- HELPER: MAPPING ICON & WARNA BRAND (LENGKAP) ---
+// --- HELPER: MAPPING ICON & WARNA BRAND (UPDATED) ---
 const getTechDetails = (techName) => {
   const name = techName.toLowerCase();
+
+  // --- FRONTEND FRAMEWORKS ---
   if (name.includes('vue')) return { icon: 'ph-file-vue', color: '#4FC08D' };
-  if (name.includes('laravel')) return { icon: 'ph-file-code', color: '#FF2D20' };
   if (name.includes('react')) return { icon: 'ph-atom', color: '#61DAFB' };
+  if (name.includes('vite')) return { icon: 'ph-lightning', color: '#646CFF' };
+  if (name.includes('framer')) return { icon: 'ph-framer-logo', color: '#0055FF' };
+
+  // --- UI LIBRARIES & FONTS ---
+  // Hapus 'google' disini biar logic bawah jalan
+  if (name.includes('element')) return { icon: 'ph-layout', color: '#409EFF' }; 
   if (name.includes('tailwind')) return { icon: 'ph-wind', color: '#38B2AC' };
   if (name.includes('bootstrap')) return { icon: 'ph-bootstrap-logo', color: '#7952B3' };
+
+  // --- MOBILE & APP ---
+  if (name.includes('flutter')) return { icon: 'ph-lightning', color: '#02569B' }; 
+  if (name.includes('dart')) return { icon: 'ph-brackets-angle', color: '#0175C2' }; 
+  if (name.includes('android')) return { icon: 'ph-android-logo', color: '#3DDC84' };
+  
+  // --- BACKEND & DB ---
+  if (name.includes('laravel')) return { icon: 'ph-file-code', color: '#FF2D20' };
+  if (name.includes('node')) return { icon: 'ph-nodejs-logo', color: '#339933' };
+  if (name.includes('supabase')) return { icon: 'ph-database', color: '#3ECF8E' }; 
+  if (name.includes('postgresql') || name.includes('postgres')) return { icon: 'ph-database', color: '#336791' }; 
+  if (name.includes('mysql')) return { icon: 'ph-database', color: '#00758F' };
+  if (name.includes('firebase')) return { icon: 'ph-fire', color: '#FFCA28' };
+  
+  // --- DEPLOYMENT & TOOLS ---
+  if (name.includes('vercel')) return { icon: 'ph-triangle', color: '#FFFFFF' }; 
+  if (name.includes('phosphor')) return { icon: 'ph-pencil-circle', color: '#C2E96A' }; 
+
+  // --- LANGUAGES ---
   if (name.includes('html')) return { icon: 'ph-file-html', color: '#E34F26' };
   if (name.includes('css')) return { icon: 'ph-file-css', color: '#1572B6' };
   if (name.includes('javascript') || name.includes('js')) return { icon: 'ph-file-js', color: '#F7DF1E' };
-  if (name.includes('vite')) return { icon: 'ph-lightning', color: '#646CFF' };
-  if (name.includes('mysql') || name.includes('database')) return { icon: 'ph-database', color: '#00758F' };
-  if (name.includes('sheet')) return { icon: 'ph-table', color: '#0F9D58' };
-  if (name.includes('framer')) return { icon: 'ph-framer-logo', color: '#0055FF' };
+  if (name.includes('typescript') || name.includes('ts')) return { icon: 'ph-file-ts', color: '#3178C6' };
+  
+  // --- PYTHON & BACKEND ---
+  if (name.includes('python') || name.includes('.py')) return { icon: 'ph-terminal', color: '#3776AB' };
+  if (name.includes('django')) return { icon: 'ph-stack', color: '#092E20' }; 
+  if (name.includes('flask')) return { icon: 'ph-flask', color: '#FFFFFF' };
+
+  // --- NO-CODE & APPSHEET (LOGIC FIX) ---
+  // 1. AppSheet (Cek duluan biar dapet icon pesawat biru)
+  if (name.includes('appsheet')) return { icon: 'ph-paper-plane-tilt', color: '#4285F4' }; 
+  // 2. Google Sheet / Excel (Baru dapet icon table hijau)
+  if (name.includes('sheet') || name.includes('excel')) return { icon: 'ph-table', color: '#0F9D58' }; 
+  // 3. Automation
   if (name.includes('automation')) return { icon: 'ph-robot', color: '#FF9900' };
-  return { icon: 'ph-code', color: '#b084ff' };
+
+  // --- VANILLA / SEO ---
+  if (name.includes('netlify')) return { icon: 'ph-cloud-arrow-up', color: '#00C7B7' }; 
+  if (name.includes('seo')) return { icon: 'ph-magnifying-glass', color: '#FFA500' }; 
+  if (name.includes('responsive')) return { icon: 'ph-device-mobile', color: '#B084FF' }; 
+
+  // --- 3D & ANIMATION ---
+  if (name.includes('three')) return { icon: 'ph-cube', color: '#000000' }; 
+  if (name.includes('spline')) return { icon: 'ph-bezier-curve', color: '#F854C5' }; 
+  if (name.includes('webgl')) return { icon: 'ph-globe', color: '#990000' }; 
+  if (name.includes('blender')) return { icon: 'ph-nut', color: '#E87D0D' }; 
+
+  // --- DESIGN TOOLS ---
+  if (name.includes('figma')) return { icon: 'ph-figma-logo', color: '#F24E1E' }; 
+  if (name.includes('github')) return { icon: 'ph-github-logo', color: '#ffffff' }; 
+  if (name.includes('vscode')) return { icon: 'ph-laptop', color: '#23A9F2' }; 
+  if (name.includes('canva')) return { icon: 'ph-palette', color: '#00C4CC' }; 
+  if (name.includes('illustrator') || name.includes('adobe')) return { icon: 'ph-pen-nib', color: '#FF9A00' };
+
+  // --- GOOGLE SERVICES (LOGIC FIX) ---
+  // 1. Cek Font dulu (Google Fonts) -> Icon Aa Merah
+  if (name.includes('font')) return { icon: 'ph-text-aa', color: '#EA4335' }; 
+  
+  // 2. Cek Google General (Sign-In, Analytics) -> Icon G Biru
+  if (name.includes('google')) return { icon: 'ph-google-logo', color: '#4285F4' };
+
+  // Default
+  return { icon: 'ph-code', color: '#b084ff' }; 
 }
 
-// DATA PROJECT
+// DATA PROJECT (Update: descShort vs descLong)
 const devProjects = ref([
   {
     id: 1,
     title: 'Storydesto',
     type: 'Marketplace Platform',
     client: 'Internal Startup',
-    desc: 'A digital marketplace connecting photography vendors with clients. Features a Smart Booking System, integrated Payment Gateway, and a comprehensive Admin Dashboard to streamline visual service transactions.',
-    stack: ['HTML', 'CSS', 'JavaScript'],
+    // Deskripsi Pendek (Card Luar)
+    descShort: 'A digital marketplace connecting photography vendors with clients seamlessly.',
+    // Deskripsi Panjang (Popup)
+    descLong: 'A comprehensive digital marketplace designed to bridge photography vendors with clients. Features include a Smart Booking System, integrated multi-payment Gateway (Midtrans), real-time vendor availability checking, and a robust Admin Dashboard for managing transactions and services.',
+    // Stack Lengkap
+    stack: ['HTML5 Semantic', 'CSS3 Modern', 'Vanilla JS (ES6+)', 'Netlify', 'SEO Optimized'],
     images: [
         '/coverdesto.png',
-        '/desto/desto1.png',
+        '/desto/desto1.png', 
         '/desto/desto2.png',
         '/desto/desto3.png'
     ],
@@ -42,9 +109,10 @@ const devProjects = ref([
     id: 2,
     title: "Personal Portfolio",
     type: 'Frontend Development',
-    client: 'Personal Branding',
-    desc: 'Interactive portfolio with Glassmorphism design. Built with Vue.js as a Single Page Application (SPA) to deliver a fast, smooth, and fully responsive user experience across all devices.',
-    stack: ['Vue.js', 'HTML', 'CSS', 'Vite'],
+    client: 'Personal Project',
+    descShort: 'Interactive portfolio featuring a modern Glassmorphism design.',
+    descLong: 'An interactive personal portfolio website showcasing projects and skills. Built with Vue.js 3 as a Single Page Application (SPA) for a fast, smooth user experience. The design focuses on modern Glassmorphism aesthetics with smooth scroll animations and mobile-first responsiveness.',
+    stack: ['Vue.js', 'Element UI', 'Vite', 'Vercel', 'Google Fonts'],
     images: ['/webwildan.png'],
     link: 'https://portfoliowildan.my.id/',
     github: null,
@@ -54,8 +122,9 @@ const devProjects = ref([
     title: "D'Production Surabaya",
     type: 'Company Profile',
     client: "D'Production House",
-    desc: 'Official landing page for a creative production house. Designed to professionally showcase video showreels, detail services, and enhance brand credibility.',
-    stack: ['HTML', 'CSS', 'Javascript'],
+    descShort: 'Official landing page for a creative production house.',
+    descLong: 'Official landing page for a creative production house in Surabaya. Designed to professionally showcase video showreels, detail services packages, and enhance brand credibility with an elegant, dark-themed layout and basic SEO optimization.',
+    stack: ['HTML5 Semantic', 'CSS3 Modern', 'Vanilla JS (ES6+)', 'Netlify', 'SEO Optimized'],
     images: ['/dproduction.png'],
     link: 'https://dproductionsub.netlify.app/',
     github: 'https://github.com/amdwildanabdillah/dproductionsub'
@@ -65,7 +134,8 @@ const devProjects = ref([
     title: "Invitation Kit",
     type: 'Digital Asset',
     client: 'Vixel Product',
-    desc: 'A highly customizable digital invitation template. Built for speed and aesthetic with smooth animations, RSVP integration, and mobile-first responsive layout.',
+    descShort: 'Highly customizable digital invitation template with RSVP.',
+    descLong: 'A productized digital invitation template built for speed and aesthetics. Features smooth entrance animations, integrated Google Forms RSVP, add-to-calendar functionality, and a fully responsive mobile-first layout tailored for modern event needs.',
     stack: ['Vue.js','HTML','Tailwind CSS'],
     images: ['/wedinvite.png'],
     link: 'https://wedding-invitation-wildan.vercel.app/',
@@ -73,10 +143,11 @@ const devProjects = ref([
   },
   {
     id: 5,
-    title: "Vixel Creative Landing",
+    title: "Vixel Creative",
     type: 'Company Profile',
     client: 'Vixel Creative HQ',
-    desc: 'Landing page for Web Dev & AppSheet Solution agency. Designed professionally showcase projects, detail service, and enhance brand credibility.',
+    descShort: 'Landing page for Web Dev & AppSheet Solution agency.',
+    descLong: 'The official agency landing page for Vixel Creative. It serves as a central hub to showcase our services in Web Development and AppSheet solutions, display portfolio highlights, and provide client contact avenues. Built with modern animations using Framer Motion.',
     stack: ['Vue.js','Vite','Tailwind CSS','Framer Motion'],
     images: ['/vixel.png'],
     link: 'https://vixelcreative.my.id/',
@@ -85,60 +156,72 @@ const devProjects = ref([
   {
     id: 6,
     title: "WildanInvites HQ",
-    type: "Internal Tool",
-    client: 'Finance Dept.',
-    desc: "A dedicated internal management tool for WildanInvites, built with AppSheet. Features robust cashflow tracking, automated P&L reporting, and expense monitoring.",
+    type: "Appsheet Development",
+    client: 'WildanInvites Finance',
+    descShort: "Dedicated internal management tool for cashflow tracking.",
+    descLong: "A robust internal tool built purely on AppSheet and Google ecosystem for WildanInvites. It automates cashflow tracking, generates real-time Profit & Loss (P&L) reports, monitors operational expenses, and manages client database without writing a single line of traditional code.",
     stack: ['AppSheet','Google Sheet', 'Automation'],
     images: ['/cashflowhq.png'],
+    link: null,
+    github: null,
+  },
+  {
+    id: 7,
+    title: "Puskewan Mobile",
+    type: "Android App",
+    client: 'Puskeswan Trenggalek',
+    descShort: "Mobile application for veterinary services management.",
+    descLong: "A dedicated mobile application designed for Puskeswan Trenggalek to manage veterinary services. It features appointment scheduling, medical record tracking for livestock, and real-time reporting for field officers.",
+    stack: ['Flutter', 'Dart', 'Supabase', 'PostgreSQL', 'Google Sign-In'],
+    images: [
+      '/puskeswan/1.png',
+      '/puskeswan/2.png',
+      '/puskeswan/3.png',
+      '/puskeswan/4.png',
+      '/puskeswan/5.png',
+      '/puskeswan/6.png',
+      '/puskeswan/7.png',
+      '/puskeswan/8.png',
+      '/puskeswan/9.png',
+      '/puskeswan/10.png',
+      '/puskeswan/11.png'
+    ],
     link: null,
     github: null,
   }
 ])
 
-// --- LOGIKA POPUP & BACK BUTTON FIX ---
+// --- LOGIKA POPUP & HISTORY FIX ---
 const activeProject = ref(null)
 const currentImageIndex = ref(0)
 
-// 1. Fungsi Buka Modal
 const openModal = (project) => {
   activeProject.value = project
   currentImageIndex.value = 0
   document.body.style.overflow = 'hidden'
-  
-  // 🔥 TRICK BIAR TOMBOL BACK HP GAK KELUAR HALAMAN 🔥
-  // Kita "pura-pura" nambah history baru
   window.history.pushState({ modalOpen: true }, '')
 }
 
-// 2. Fungsi Tutup Modal (via Tombol X / Klik Luar)
 const closeModal = () => {
-  // Kalau user klik X, kita mundur 1 langkah di history (biar sinkron sama tombol back)
   window.history.back()
 }
 
-// 3. Listener Tombol Back HP
 const handleBackButton = () => {
-  // Kalau tombol back dipencet, browser otomatis mundur history-nya.
-  // Kita tinggal tutup modalnya aja.
   if (activeProject.value) {
     activeProject.value = null
     document.body.style.overflow = 'auto'
   }
 }
 
-// Pasang Listener saat halaman dimuat
 onMounted(() => {
   window.addEventListener('popstate', handleBackButton)
 })
 
-// Copot Listener kalau pindah halaman beneran
 onUnmounted(() => {
   window.removeEventListener('popstate', handleBackButton)
-  // Jaga-jaga kalau modal masih kebuka pas pindah halaman
   document.body.style.overflow = 'auto'
 })
 
-// Slider Logic
 const nextImage = () => {
   if (activeProject.value) {
     currentImageIndex.value = (currentImageIndex.value + 1) % activeProject.value.images.length
@@ -188,11 +271,11 @@ const prevImage = () => {
             <div class="project-info">
                 <span class="project-type">{{ item.type }}</span>
                 <h2>{{ item.title }}</h2>
-                <p class="desc">{{ item.desc }}</p>
+                <p class="desc">{{ item.descShort }}</p>
 
                 <div class="action-buttons">
                     <a v-if="item.github" :href="item.github" target="_blank" class="btn-secondary">
-                        <i class="ph ph-github-logo"></i> Repository
+                        <i class="ph ph-github-logo"></i> Repo
                     </a>
                     <button class="btn-primary outline" @click="openModal(item)">
                         View Details
@@ -231,7 +314,7 @@ const prevImage = () => {
                  <h2>{{ activeProject.title }}</h2>
             </div>
 
-            <p class="desc-full">{{ activeProject.desc }}</p>
+            <p class="desc-full">{{ activeProject.descLong }}</p>
 
             <div class="divider"></div>
 
@@ -272,11 +355,10 @@ const prevImage = () => {
 </template>
 
 <style scoped>
-/* --- SETUP DASAR --- */
+/* STYLE SAMA SEPERTI SEBELUMNYA (SUPAYA AMAN) */
 :root { --primary-color: #b084ff; }
 .dev-container { padding: 40px 20px; min-height: 100vh; max-width: 1200px; margin: 0 auto; color: white; }
 
-/* HEADER & LIST (STANDARD) */
 .dev-header { text-align: center; margin-bottom: 80px; display: flex; flex-direction: column; align-items: center; }
 .header-text h1 { font-size: 3rem; margin: 15px 0; font-family: 'Clash Display', sans-serif; }
 .header-text p { color: #aaa; }
@@ -285,7 +367,6 @@ const prevImage = () => {
 .btn-back { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #aaa; font-size: 0.9rem; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 20px; transition: 0.3s; }
 .btn-back:hover { background: rgba(255,255,255,0.1); color: white; }
 
-/* PROJECT CARDS */
 .project-list { display: flex; flex-direction: column; gap: 100px; }
 .project-row { display: flex; align-items: center; gap: 60px; }
 .project-row.reverse { flex-direction: row-reverse; }
@@ -311,53 +392,25 @@ const prevImage = () => {
 .btn-secondary { display: flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; transition: 0.3s; }
 .btn-secondary:hover { border-color: white; background: rgba(255,255,255,0.1); }
 
-/* === 🔥 MODAL VERTIKAL LAYOUT (SCROLLABLE) 🔥 === */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(10px); }
-
-.modal-content { 
-    width: 100%; max-width: 700px; /* Lebar ideal buat baca */
-    max-height: 90vh; 
-    background: #111; border: 1px solid rgba(255,255,255,0.2); 
-    display: flex; flex-direction: column; /* SUSUN KE BAWAH */
-    overflow-y: auto; /* SCROLL VERTIKAL AKTIF */
-    position: relative; border-radius: 20px; 
-}
-
-/* Tombol Close */
-.close-btn { 
-    position: absolute; top: 15px; right: 15px; z-index: 20;
-    background: rgba(0,0,0,0.6); border: none; color: white; 
-    width: 35px; height: 35px; border-radius: 50%; cursor: pointer; 
-    display: flex; align-items: center; justify-content: center;
-    transition: 0.3s;
-}
+.modal-content { width: 100%; max-width: 700px; max-height: 90vh; background: #111; border: 1px solid rgba(255,255,255,0.2); display: flex; flex-direction: column; overflow-y: auto; position: relative; border-radius: 20px; }
+.close-btn { position: absolute; top: 15px; right: 15px; z-index: 20; background: rgba(0,0,0,0.6); border: none; color: white; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
 .close-btn:hover { background: #b084ff; transform: rotate(90deg); }
 
-/* Bagian Gambar (Atas) */
-.modal-image-section { 
-    width: 100%; background: #000; 
-    padding: 0; /* Full width */
-}
+.modal-image-section { width: 100%; background: #000; padding: 0; }
 .main-image-wrapper { position: relative; width: 100%; height: auto; }
 .main-img { width: 100%; height: auto; display: block; max-height: 400px; object-fit: contain; background: #050505; }
-
-/* Navigasi Slider */
 .slider-nav button { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; transition: 0.3s; }
 .slider-nav button:hover { background: #b084ff; }
 .slider-nav button:first-child { left: 10px; } .slider-nav button:last-child { right: 10px; }
-
-/* Thumbnails */
 .thumbnails-row { display: flex; gap: 8px; padding: 15px; justify-content: center; background: #080808; border-bottom: 1px solid rgba(255,255,255,0.1); }
 .thumbnails-row img { width: 60px; height: 40px; object-fit: cover; border-radius: 4px; cursor: pointer; opacity: 0.5; border: 2px solid transparent; transition: 0.3s; }
 .thumbnails-row img.active { opacity: 1; border-color: #b084ff; }
 
-/* Bagian Info (Bawah) */
 .modal-info-section { padding: 40px; text-align: left; }
-
 .modal-type-badge { display: inline-block; color: #b084ff; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
 .modal-info-section h2 { font-size: 2.2rem; font-family: 'Clash Display'; line-height: 1.2; margin: 0 0 20px 0; }
 .desc-full { color: #ccc; line-height: 1.8; font-size: 1.05rem; white-space: pre-line; margin-bottom: 30px; }
-
 .divider { height: 1px; background: rgba(255,255,255,0.1); width: 100%; margin: 30px 0; }
 
 .meta-row { display: flex; flex-direction: column; gap: 30px; }
@@ -365,34 +418,18 @@ const prevImage = () => {
 .meta-label { font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
 .client-name { font-size: 1.1rem; color: white; font-weight: 500; margin: 0; }
 
-/* Tech Stack Colored */
 .tech-icons-colored { display: flex; flex-wrap: wrap; gap: 10px; }
-.tech-item-color {
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; 
-    display: flex; align-items: center; gap: 8px; color: #ddd;
-    transition: 0.3s;
-}
-.tech-item-color:hover { 
-    background: rgba(255,255,255,0.1); 
-    border-color: var(--brand-color); 
-    color: white; 
-    box-shadow: 0 0 15px var(--brand-color);
-}
+.tech-item-color { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; color: #ddd; transition: 0.3s; }
+.tech-item-color:hover { background: rgba(255,255,255,0.1); border-color: var(--brand-color); color: white; box-shadow: 0 0 15px var(--brand-color); }
 .tech-item-color i { font-size: 1.2rem; color: var(--brand-color); }
 
-/* Tombol Aksi Akhir (Sejajar) */
 .modal-footer-actions { margin-top: 40px; display: flex; gap: 20px; }
-.action-chip { 
-    flex: 1; padding: 15px; text-align: center; border-radius: 12px; font-weight: 700; 
-    text-decoration: none; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; 
-}
+.action-chip { flex: 1; padding: 15px; text-align: center; border-radius: 12px; font-weight: 700; text-decoration: none; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .action-chip.primary { background: #b084ff; color: white; border: none; }
 .action-chip.primary:hover { background: white; color: black; box-shadow: 0 5px 20px rgba(176, 132, 255, 0.4); }
 .action-chip.secondary { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; }
 .action-chip.secondary:hover { border-color: white; background: rgba(255,255,255,0.1); }
 
-/* Transition Fade */
 .fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 
@@ -406,7 +443,6 @@ const prevImage = () => {
     .header-text h1 { font-size: 2.5rem; }
 }
 
-/* Glow */
 .ambient-glow { position: fixed; width: 500px; height: 500px; border-radius: 50%; filter: blur(120px); z-index: -1; opacity: 0.4; pointer-events: none; }
 .glow-purple { top: -100px; right: -100px; background: rgba(120, 58, 255, 0.2); }
 .glow-cyan { bottom: -100px; left: -100px; background: rgba(0, 255, 209, 0.2); }

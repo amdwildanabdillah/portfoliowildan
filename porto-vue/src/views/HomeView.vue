@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 
+// --- 1. LOGIC SCROLL & NAVIGASI (Bawaan Lama) ---
 const scrollToSection = (id) => {
   const element = document.getElementById(id)
   if (element) {
@@ -11,6 +12,28 @@ const scrollToSection = (id) => {
 const activeSection = ref('hero-section')
 let navObserver = null
 let scrollAnimationObserver = null
+
+// --- 2. LOGIC POPUP ARSENAL (Baru) ---
+const showArsenal = ref(false)
+
+const arsenalItems = [
+  {
+    category: 'Development Stack',
+    icon: 'ph-code',
+    tools: ['Visual Studio Code', 'Vue.js Ecosystem', 'Flutter & Dart', 'Git & GitHub', 'Vercel / Hostinger', 'Tailwind CSS']
+  },
+  {
+    category: 'Photography Gear',
+    icon: 'ph-camera',
+    tools: ['Sony A7 III', 'Sony A6400', 'Sony A7 II', 'Sony 50 1.8', '7Artisans 35 1.2 II', 'Sony 85 1.8','Adobe Lightroom', 'Adobe Photoshop', 'Canva']
+  },
+  {
+    category: 'Video & Drone',
+    icon: 'ph-film-strip',
+    tools: ['DJI Mini 3 Pro', 'DJI Air 2S', 'DJI MAVIC Pro','Adobe Premiere Pro', 'DaVinci Resolve']
+  }
+]
+// -------------------------------------
 
 onMounted(() => {
   const sections = document.querySelectorAll('section[id], header[id]')
@@ -95,16 +118,17 @@ onUnmounted(() => {
               <br><br>
               Sebagai Founder <b>Vixel Creative</b>, saya menggabungkan ilmu <i>Communication</i> dengan teknis <i>Programming</i>. Saya tidak hanya menulis kode atau merekam gambar, tapi saya <b>membangun narasi</b> digital yang utuh.
             </p>
+            
             <div class="stats-pro">
               <div class="stat-box"><h3>3+</h3><p>Years</p></div>
               <div class="stat-box"><h3>15+</h3><p>Projects</p></div>
               <div class="stat-box"><h3>Vue.js</h3><p>Specialist</p></div>
             </div>
+
              <div class="arsenal-pro">
-                <i class="ph ph-file-vue" title="Vue.js"></i>
-                <i class="ph ph-atom" title="React/Modern Web"></i>
-                <i class="ph ph-camera-rotate" title="Sony Alpha"></i>
-                <i class="ph ph-drone" title="DJI Drone"></i>
+                <button class="glass-btn" @click="showArsenal = true">
+                  <i class="ph ph-toolbox"></i> View My Arsenal
+                </button>
              </div>
 
              <a href="https://wa.me/6285232351908?text=Halo%20Wildan" target="_blank" class="action-btn">
@@ -190,8 +214,170 @@ onUnmounted(() => {
     </section>
 
   </main>
+
+  <Transition name="fade">
+    <div v-if="showArsenal" class="modal-backdrop" @click="showArsenal = false">
+      <div class="glass-card modal-content" @click.stop>
+        <button class="close-btn" @click="showArsenal = false"><i class="ph ph-x"></i></button>
+        
+        <div class="modal-header">
+          <h2>My <span class="text-gradient">Arsenal</span></h2>
+          <p>Tools behind the works.</p>
+        </div>
+
+        <div class="arsenal-grid">
+          <div v-for="(group, i) in arsenalItems" :key="i" class="arsenal-group">
+              <div class="group-title">
+                  <i :class="['ph', group.icon]"></i> <span>{{ group.category }}</span>
+              </div>
+              <div class="tags-container">
+                  <span v-for="(tool, t) in group.tools" :key="t" class="tool-tag">
+                      {{ tool }}
+                  </span>
+              </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </Transition>
+
 </template>
 
 <style scoped>
-/* STYLE DI GLOBAL.CSS */
+/* =========================================
+   STYLE KHUSUS COMPONENT (POPUP & BUTTON)
+   Matches Global Theme: #b084ff (Purple)
+   ========================================= */
+
+/* 1. TOMBOL PEMICU (View My Arsenal) */
+.arsenal-pro {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.glass-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  /* Menggunakan variable glass-border biar konsisten */
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border); 
+  border-radius: 50px;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.glass-btn:hover {
+  background: rgba(176, 132, 255, 0.15); /* Aksen ungu transparan */
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(176, 132, 255, 0.2); /* Glow ungu */
+  color: #fff;
+}
+
+.glass-btn i { font-size: 1.2rem; }
+
+/* 2. MODAL / POPUP STYLES */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 5, 5, 0.9); /* Lebih gelap dikit dari bg-color main */
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.modal-content {
+  background: #0a0a0a !important; /* Background solid gelap biar kebaca */
+  border: 1px solid var(--glass-border);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 24px;
+  position: relative;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+}
+
+/* Custom Scrollbar Modal */
+.modal-content::-webkit-scrollbar { width: 6px; }
+.modal-content::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+.modal-content::-webkit-scrollbar-track { background: transparent; }
+
+.close-btn {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: rgba(255,255,255,0.05);
+  border: none;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  color: #888;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.close-btn:hover { 
+  background: var(--primary-color); 
+  color: #fff; 
+}
+
+.modal-header { margin-bottom: 2rem; text-align: center; }
+.modal-header h2 { font-size: 1.8rem; margin: 0; color: #fff; font-family: 'Clash Display', sans-serif; }
+.modal-header p { color: var(--text-muted); margin-top: 5px; font-size: 0.9rem; }
+
+/* 3. LIST ITEM STYLES */
+.arsenal-group {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+.arsenal-group:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.group-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: var(--primary-color); /* Pake variable ungu */
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tool-tag {
+  background: rgba(255,255,255,0.03);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #ccc;
+  border: 1px solid var(--glass-border);
+  transition: 0.2s;
+}
+
+.tool-tag:hover {
+  background: rgba(176, 132, 255, 0.1);
+  border-color: var(--primary-color); /* Border ungu pas hover */
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Transisi Vue */
+.fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
 </style>
